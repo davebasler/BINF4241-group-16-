@@ -38,7 +38,14 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Test2">
+    <configuration name="Test2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Test2" />
+      <module name="TEST 2" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="example" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="example" />
       <module name="TEST 2" />
@@ -48,6 +55,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Test2" />
         <item itemvalue="Application.example" />
       </list>
     </recent_temporary>
@@ -67,7 +75,7 @@
       <workItem from="1570046471721" duration="75000" />
       <workItem from="1570046610167" duration="671000" />
       <workItem from="1570082538088" duration="629000" />
-      <workItem from="1570097492857" duration="259000" />
+      <workItem from="1570097492857" duration="517000" />
     </task>
     <servers />
   </component>
