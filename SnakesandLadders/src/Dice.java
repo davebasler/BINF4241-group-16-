@@ -1,8 +1,15 @@
-public class Dice {
-    public static void getnumber(){
+import java.util.Random;
 
-        System.out.println("A number 1-6");
-        System.out.println("It was really hard");
-        System.out.println("Yeahhh");
+public class Dice {
+
+
+    public static int getnumber(){
+        Random rand = new Random();
+
+        int number = rand.nextInt(6);
+
+        return number;
+
     }
 }
+
