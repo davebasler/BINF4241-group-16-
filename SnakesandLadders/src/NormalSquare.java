@@ -1,9 +1,8 @@
-/*public class NormalSquare {
+//public class NormalSquare {
 
-        public static boolean occupied(){
+  //      public static boolean occupied(){
 
 
 
-    }
-}
-*\
+    //}
+//}
