@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="72b19234-7090-4905-961e-e7364847efe1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/EndSquare.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EndSquare.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Snake.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Snake.java" afterDir="false" />
-    </list>
+    <list default="true" id="72b19234-7090-4905-961e-e7364847efe1" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +68,12 @@
       <option name="presentableId" value="Default" />
       <updated>1570098890791</updated>
       <workItem from="1570098895218" duration="715000" />
+<<<<<<< HEAD
       <workItem from="1570099981505" duration="5829000" />
+=======
+      <workItem from="1570099981505" duration="4969000" />
+      <workItem from="1570141189793" duration="81000" />
+>>>>>>> dc650c971cffa7e6cab23ce6a6397189b08856ad
     </task>
     <servers />
   </component>
