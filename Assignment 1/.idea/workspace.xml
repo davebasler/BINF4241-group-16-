@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="72b19234-7090-4905-961e-e7364847efe1" name="Default Changelist" comment="" />
+    <list default="true" id="b304a116-8a57-427e-9c73-301038446d45" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,21 +15,10 @@
       </list>
     </option>
   </component>
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
-  </component>
-  <component name="ProjectId" id="1Rgq3xUK2BUskoZI3sphhoiNxIR" />
+  <component name="ProjectId" id="1Rjs5cZZbJYSq9FuyAeLEKRJ3Vm" />
   <component name="PropertiesComponent">
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="node.js.detected.package.eslint" value="true" />
-    <property name="node.js.detected.package.tslint" value="true" />
-    <property name="node.js.path.for.package.eslint" value="project" />
-    <property name="node.js.path.for.package.tslint" value="project" />
-    <property name="node.js.selected.package.eslint" value="(autodetect)" />
-    <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -46,7 +35,7 @@
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="SnakesandLadders" />
+      <module name="SnakesAndLadders" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -62,34 +51,20 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="72b19234-7090-4905-961e-e7364847efe1" name="Default Changelist" comment="" />
-      <created>1570098890791</created>
+      <changelist id="b304a116-8a57-427e-9c73-301038446d45" name="Default Changelist" comment="" />
+      <created>1570191657365</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1570098890791</updated>
-      <workItem from="1570098895218" duration="715000" />
-      <workItem from="1570099981505" duration="5829000" />
-      <workItem from="1570099981505" duration="4969000" />
-      <workItem from="1570141189793" duration="81000" />
-      <workItem from="1570178038878" duration="49000" />
-      <workItem from="1570178372637" duration="62000" />
+      <updated>1570191657365</updated>
+      <workItem from="1570191660083" duration="17422000" />
+      <workItem from="1570389979672" duration="2297000" />
+      <workItem from="1570453906397" duration="337000" />
+      <workItem from="1570472450634" duration="2514000" />
+      <workItem from="1570542658395" duration="1342000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
-          </value>
-        </entry>
-      </map>
-    </option>
   </component>
 </project>
