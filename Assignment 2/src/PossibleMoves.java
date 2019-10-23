@@ -60,6 +60,7 @@ public class PossibleMoves {
                 for (int j = 0; j < 8; j++) {
                     if(gameboard.squares[i][j].get_figure()!=null) {
                         if (gameboard.squares[i][j].get_figure().get_colour().equals(current_player_color.toString())) {
+                            list.clear();
                             list = gameboard.squares[i][j].get_figure().get_list();
                             for (Square square : list) {
                                 if(!possible_moves_white.contains(square)){
@@ -75,10 +76,12 @@ public class PossibleMoves {
         }
 
         else{
+            possible_moves_black.clear();
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if(gameboard.squares[i][j].get_figure()!=null) {
                         if (gameboard.squares[i][j].get_figure().get_colour().equals(current_player_color.toString())) {
+                            list.clear();
                             list = gameboard.squares[i][j].get_figure().get_list();
                             for (Square square : list) {
                                 if(!possible_moves_black.contains(square)){
@@ -156,6 +159,7 @@ public class PossibleMoves {
                                 }
                             }
                             else if(gameboard.squares[i][j].get_figure().get_colour().equals(Color.WHITE.toString())){
+                                all_moves.clear();
                                 all_moves = gameboard.squares[i][j].get_figure().get_list();
                                 for (int k = 0; k < 8; k++) {
                                     for (int r = 0; r < 8; r++) {
@@ -163,6 +167,9 @@ public class PossibleMoves {
                                             if(gameboard.squares[k][r].get_figure()==null){
                                                 Figure temp_figure = gameboard.squares[i][j].remove_figure();
                                                 gameboard.squares[k][r].add_figure(temp_figure);
+                                                update_figure_list(gameboard);
+                                                update_player_list(gameboard,Color.WHITE);
+                                                update_player_list(gameboard,Color.BLACK);
                                                 boolean check_if_check = is_check(gameboard,current_player_color);
                                                 if(!check_if_check){
                                                     gameboard.squares[k][r].remove_figure();
@@ -180,7 +187,6 @@ public class PossibleMoves {
                         }
                     }
                 }
-
                 System.out.println("CHECKMATE!!!!");
                 return true;
             }
@@ -198,6 +204,33 @@ public class PossibleMoves {
                                     }
                                 }
                             }
+
+                        else if(gameboard.squares[i][j].get_figure().get_colour().equals(Color.BLACK.toString())){
+                            all_moves.clear();
+                            all_moves = gameboard.squares[i][j].get_figure().get_list();
+                            for (int k = 0; k < 8; k++) {
+                                for (int r = 0; r < 8; r++) {
+                                    if(all_moves.contains(gameboard.squares[k][r])) {
+                                        if (gameboard.squares[k][r].get_figure() == null) {
+                                            Figure temp_figure = gameboard.squares[i][j].remove_figure();
+                                            gameboard.squares[k][r].add_figure(temp_figure);
+                                            update_figure_list(gameboard);
+                                            update_player_list(gameboard, Color.WHITE);
+                                            update_player_list(gameboard, Color.BLACK);
+                                            boolean check_if_check = is_check(gameboard, current_player_color);
+                                            if (!check_if_check) {
+                                                gameboard.squares[k][r].remove_figure();
+                                                gameboard.squares[i][j].add_figure(temp_figure);
+                                                System.out.println("NOT CHECKMATE!!!!");
+                                                return false;
+                                            }
+                                            gameboard.squares[k][r].remove_figure();
+                                            gameboard.squares[i][j].add_figure(temp_figure);
+                                        }
+                                    }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -205,7 +238,4 @@ public class PossibleMoves {
                 return true;
             }
     }
-
-
-
 }

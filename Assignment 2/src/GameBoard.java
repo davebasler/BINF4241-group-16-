@@ -38,10 +38,10 @@ public class GameBoard {
                     squares[i][j].add_figure(new Bishop(Color.BLACK));
                 }
                 else if(i == 0 && j==3) {
-                    squares[i][j].add_figure(new King(Color.BLACK));
+                    squares[i][j].add_figure(new Queen(Color.BLACK));
                 }
                 else if(i == 0 && j==4) {
-                    squares[i][j].add_figure(new Queen(Color.BLACK));
+                    squares[i][j].add_figure(new King(Color.BLACK));
                 }
                 else if(i == 1 && (0<=j || j< 8)) {
                     squares[i][j].add_figure(new Pawn(Color.BLACK));

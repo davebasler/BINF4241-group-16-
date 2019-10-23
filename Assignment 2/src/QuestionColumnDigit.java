@@ -5,35 +5,49 @@ public class QuestionColumnDigit {
     public void get_input(String player_name) {
         boolean temp2 = true;
         String input = "a2a3";
+        old_row = 0;
         while (temp2) {
             Scanner scan = new Scanner(System.in);
             System.out.println(player_name + " please enter your move: ");
             input = scan.next();
-            int letter1 = (int) input.charAt(0);
-            int digit1 = (int) input.charAt(1);
-            int letter2 = (int) input.charAt(2);
-            int digit2 = (int) input.charAt(3);
-            if (letter1 >= 97 && letter1 < 105 && digit1 >= 48&& digit1 < 57 && letter2 >= 97 && letter2 < 105 && digit2 >= 48 && digit2 < 57) {
-                temp2 = false;
+            if(input.equals("0-0")){  //small rochade
+                old_row = -1;
+                break;
             }
-            else{
-                System.out.println("Come on we told you the rules! Try again!");
+            else if(input.equals("0-0-0")){ //big rochade
+                old_row=-2;
+                break;
+            }
+            else {
+                if (input.length() == 4) {
+                    int letter1 = (int) input.charAt(0);
+                    int digit1 = (int) input.charAt(1);
+                    int letter2 = (int) input.charAt(2);
+                    int digit2 = (int) input.charAt(3);
+                    if (letter1 >= 97 && letter1 < 105 && digit1 >= 48 && digit1 < 57 && letter2 >= 97 && letter2 < 105 && digit2 >= 48 && digit2 < 57) {
+                        temp2 = false;
+                    } else {
+                        System.out.println("Please enter the move according to the rules!");
+                    }
+                } else {
+                    System.out.println("Please enter 4 characters!");
+                }
             }
 
         }
+            if(old_row!=-1&&old_row!=-2) {
+                Converter convert = new Converter();
 
-            Converter convert = new Converter();
+                old_column = convert.convert(input.charAt(0));
+                char temp = input.charAt(1);
 
-            old_column = convert.convert(input.charAt(0));
-            char temp = input.charAt(1);
-
-            int char_as_int = Integer.parseInt(String.valueOf(temp));
-            old_row = Math.abs(char_as_int - 8);
-            new_column = convert.convert(input.charAt(2));
-            temp = input.charAt(3);
-            char_as_int = Integer.parseInt(String.valueOf(temp));
-            new_row = Math.abs(char_as_int - 8);
-
+                int char_as_int = Integer.parseInt(String.valueOf(temp));
+                old_row = Math.abs(char_as_int - 8);
+                new_column = convert.convert(input.charAt(2));
+                temp = input.charAt(3);
+                char_as_int = Integer.parseInt(String.valueOf(temp));
+                new_row = Math.abs(char_as_int - 8);
+            }
         }
 
 
