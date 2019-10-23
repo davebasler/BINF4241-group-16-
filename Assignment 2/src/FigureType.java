@@ -1,0 +1,3 @@
+public enum FigureType {
+    KING,QUEEN,PAWN,TOWER,BISHOP,KNIGHT,SQUARE
+}
