@@ -30,7 +30,7 @@ public class Main {
         gameboard.PrintGameboardStatus();
 
         Move move = new Move();
-        QuestionColumnDigit question = new QuestionColumnDigit();
+        UserInput userinput = new UserInput();
 
         /*
         Game loop: lasts as long as the game is not over.
@@ -42,7 +42,7 @@ public class Main {
             for(int i=0; i<2;i++){
                 Player active_player = players.get(i);
 
-                winner_name = move.move_figure(gameboard, question, active_player);
+                winner_name = move.move_figure(gameboard, userinput, active_player);
 
                 gameboard.PrintGameboardStatus();
                 move.print_eaten_figures();

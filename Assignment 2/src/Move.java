@@ -14,15 +14,15 @@ class Move {
   checks if the proposed move is legal, then executes the move, checks if the resulting board has a check or a checkmate
   situation. If the latter is true, the game is over and this method returns the name of the winner.
    */
-    String move_figure(GameBoard gameboard, QuestionColumnDigit question, Player active_player){
+    String move_figure(GameBoard gameboard, UserInput user_input, Player active_player){
         String active_player_name = active_player.get_name();
         Color active_player_color = active_player.get_color();
 
-        question.get_input(active_player_name);
-        int old_row = question.get_old_row();
-        int old_column = question.get_old_column();
-        int new_column = question.get_new_column();
-        int new_row = question.get_new_row();
+        user_input.get_input(active_player_name);
+        int old_row = user_input.get_old_row();
+        int old_column = user_input.get_old_column();
+        int new_column = user_input.get_new_column();
+        int new_row = user_input.get_new_row();
 
         if(old_row==-1){
             System.out.println("Small Rochade");
@@ -38,9 +38,9 @@ class Move {
                 //check if there is a figure on the old square
                 if (!gameboard.squares[old_row][old_column].is_occupied()) {
                     System.out.println("There isn't a valid figure on this field!");
-                    question.get_input(active_player_name);
-                    old_column = question.get_old_column();
-                    old_row = question.get_old_row();
+                    user_input.get_input(active_player_name);
+                    old_column = user_input.get_old_column();
+                    old_row = user_input.get_old_row();
                     temp = true;
                 }
 
@@ -48,14 +48,14 @@ class Move {
                 if (!temp) {
                     if (!gameboard.squares[old_row][old_column].get_figure().get_colour().equals(active_player_color.toString())) {
                         System.out.println("There isn't a valid figure on this field!");
-                        question.get_input(active_player_name);
-                        old_column = question.get_old_column();
-                        old_row = question.get_old_row();
+                        user_input.get_input(active_player_name);
+                        old_column = user_input.get_old_column();
+                        old_row = user_input.get_old_row();
                         temp = true;
                     }
                 }
-                new_column = question.get_new_column();
-                new_row = question.get_new_row();
+                new_column = user_input.get_new_column();
+                new_row = user_input.get_new_row();
 
                 /*
                 check if proposed new square can legally be reached by using the figures is_legal and is_legal_path
@@ -95,9 +95,9 @@ class Move {
                         temp = true;
 
                         System.out.println("You can't move this figure to this field!");
-                        question.get_input(active_player_name);
-                        new_column = question.get_new_column();
-                        old_row = question.get_old_row();
+                        user_input.get_input(active_player_name);
+                        new_column = user_input.get_new_column();
+                        old_row = user_input.get_old_row();
                     }
                 }
 
@@ -108,11 +108,11 @@ class Move {
                             temp = true;
                             is_check = false;
                             System.out.println("Your King can't commit suicide!");
-                            question.get_input(active_player_name);
-                            old_column = question.get_old_column();
-                            old_row = question.get_old_row();
-                            new_column = question.get_new_column();
-                            new_row = question.get_new_row();
+                            user_input.get_input(active_player_name);
+                            old_column = user_input.get_old_column();
+                            old_row = user_input.get_old_row();
+                            new_column = user_input.get_new_column();
+                            new_row = user_input.get_new_row();
                         }
                         }
 
@@ -152,11 +152,11 @@ class Move {
                         }
                         temp = true;
                         System.out.println("Illegal move because King is still in chess!");
-                        question.get_input(active_player_name);
-                        old_column = question.get_old_column();
-                        old_row = question.get_old_row();
-                        new_column = question.get_new_column();
-                        new_row = question.get_new_row();
+                        user_input.get_input(active_player_name);
+                        old_column = user_input.get_old_column();
+                        old_row = user_input.get_old_row();
+                        new_column = user_input.get_new_column();
+                        new_row = user_input.get_new_row();
                     } else {
                         if (eaten_figure_temp == null) {
                             gameboard.squares[new_row][new_column].remove_figure();
