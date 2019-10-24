@@ -8,6 +8,12 @@ class Move {
     private List<Figure> eaten_black_figures = new ArrayList<Figure>();
     private List<Figure> eaten_white_figures = new ArrayList<Figure>();
 
+    /*
+  input: GameBoard, QuestionColumnDigit, Player
+  output: String
+  checks if the proposed move is legal, then executes the move, checks if the resulting board has a check or a checkmate
+  situation. If the latter is true, the game is over and this method returns the name of the winner.
+   */
     String move_figure(GameBoard gameboard, QuestionColumnDigit question, Player active_player){
         String active_player_name = active_player.get_name();
         Color active_player_color = active_player.get_color();
@@ -28,6 +34,8 @@ class Move {
             Boolean temp = true;
             while (temp) {
                 temp = false;
+
+                //check if there is a figure on the old square
                 if (!gameboard.squares[old_row][old_column].is_occupied()) {
                     System.out.println("There isn't a valid figure on this field!");
                     question.get_input(active_player_name);
@@ -36,6 +44,7 @@ class Move {
                     temp = true;
                 }
 
+                //check if the figure on the old square is the current players color
                 if (!temp) {
                     if (!gameboard.squares[old_row][old_column].get_figure().get_colour().equals(active_player_color.toString())) {
                         System.out.println("There isn't a valid figure on this field!");
@@ -47,6 +56,11 @@ class Move {
                 }
                 new_column = question.get_new_column();
                 new_row = question.get_new_row();
+
+                /*
+                check if proposed new square can legally be reached by using the figures is_legal and is_legal_path
+                methods
+                */
                 if (!temp) {
                     if (!gameboard.squares[old_row][old_column].get_figure().is_legal(old_row, old_column, new_row, new_column) ||
                             !gameboard.squares[old_row][old_column].get_figure().is_path_legal(gameboard, old_row, old_column, new_row, new_column) ||
@@ -102,7 +116,10 @@ class Move {
                         }
                         }
 
-
+                /*
+                if the king is currently in check, the new user input will only be accepted upon escaping the check
+                situation with the proposed move
+                */
                 while (is_check) {
                     Figure temp_figure;
                     Figure eaten_figure_temp = null;
@@ -118,8 +135,6 @@ class Move {
                     possiblemoves.update_figure_list(gameboard);
                     possiblemoves.update_player_list(gameboard, Color.BLACK);
                     possiblemoves.update_player_list(gameboard, Color.WHITE);
-
-                    //gameboard.PrintGameboardStatus();
 
                     if (active_player_color == Color.BLACK) {
                         is_check = possiblemoves.is_check(gameboard, Color.WHITE);
@@ -156,12 +171,14 @@ class Move {
                 }
             }
 
+            //player either eats enemy figure or moves to new square
             if (gameboard.squares[new_row][new_column].get_figure() == null) {
                 gameboard.squares[new_row][new_column].add_figure(gameboard.squares[old_row][old_column].remove_figure());
             } else {
                 eat_figure(gameboard, old_row, old_column, new_row, new_column, active_player);
             }
 
+            //check if pawn is at the end of the gameboard for promotion
             if (gameboard.squares[new_row][new_column].get_figure().get_type().equals(FigureType.PAWN.toString())) {
                 if (gameboard.squares[new_row][new_column].get_figure().get_colour().equals(Color.WHITE.toString()) && new_row == 0 ||
                         (gameboard.squares[new_row][new_column].get_figure().get_colour().equals(Color.BLACK.toString()) && new_row == 7)) {
@@ -169,11 +186,11 @@ class Move {
                 }
             }
 
-            //En passant
-        int time= active_player.set_timer();
-        if (gameboard.squares[new_row][new_column].get_figure().get_type().equals(FigureType.PAWN.toString())) {
-            gameboard.squares[new_row][new_column].get_figure().set_timer(time);
-        }
+            //En passant move
+            int time= active_player.set_timer();
+            if (gameboard.squares[new_row][new_column].get_figure().get_type().equals(FigureType.PAWN.toString())) {
+                gameboard.squares[new_row][new_column].get_figure().set_timer(time);
+            }
 
             possiblemoves.update_figure_list(gameboard);
             possiblemoves.update_player_list(gameboard, active_player_color);
@@ -189,7 +206,11 @@ class Move {
             }
         }
 
-
+    /*
+    input: none
+    output: none
+    prints the current list of eaten figures of both players
+    */
     void print_eaten_figures(){
         List<String> toprint_list_white = new ArrayList<>();
         List<String> toprint_list_black = new ArrayList<>();
@@ -203,9 +224,14 @@ class Move {
         System.out.print(toprint_list_white+ "     ");
         System.out.print("Eaten black figures:  ");
         System.out.println(toprint_list_black);
-
-
     }
+
+    /*
+    input: GameBoard, int, int, Color
+    output: none
+    Promotion: if a pawn reaches end of gameboard, the player can choose a queen, tower, knight or bishop to replace the
+    pawn.
+    */
     private void switch_pawn(GameBoard gameboard, int new_row, int new_column, Color current_player_color) {
         String figure = "";
         boolean condition = false;
@@ -219,8 +245,6 @@ class Move {
         }
 
         gameboard.squares[new_row][new_column].remove_figure();
-
-
             switch (figure) {
                 case "Bishop":
                     gameboard.squares[new_row][new_column].add_figure(new Bishop(current_player_color));
@@ -234,33 +258,39 @@ class Move {
                 case "Tower":
                     gameboard.squares[new_row][new_column].add_figure(new Tower(current_player_color));
                     break;
-
             }
         }
 
+    /*
+     input: GameBoard, int, int, int, int
+     output: boolean
+     returns true if figure can eat an enemy figure on the proposed square
+     */
     private boolean can_eat(GameBoard gameboard, int row_old, int column_old, int row_new, int column_new){
-
         if(gameboard.squares[row_new][column_new].get_figure()!=null){
             if(gameboard.squares[row_old][column_old].get_figure().get_colour().equals(gameboard.squares[row_new][column_new].get_figure().get_colour())){
                 return false;
             }
-            else if((gameboard.squares[row_old][column_old].get_figure().get_type().equals(FigureType.PAWN.toString()))   //Special case for pawn. It forbids the pawn to eat figures that are in front of him.
+            //Special case for pawn. It forbids the pawn to eat figures that are in front of him.
+            else if((gameboard.squares[row_old][column_old].get_figure().get_type().equals(FigureType.PAWN.toString()))
                     &&(column_old==column_new)){
                 return false;
             }
-
             else
             {
                 return true;
             }
         }
-
         else{
             return true;
         }
-
-
     }
+
+    /*
+     input: GameBoard, int, int, Player
+     output: none
+     special case for pawn figure: pawn eats the enemy figure when in a en passant situation
+     */
     private void eat_en_passant(GameBoard gameboard, int row_old, int column_old, Player active_player){
         Figure temp = gameboard.squares[row_old][column_old].remove_figure();
         active_player.add_eaten_piece();
@@ -272,6 +302,11 @@ class Move {
         }
     }
 
+     /*
+     input: GameBoard, int, int, int, int, Player
+     output: none
+     player eats the enemy figure on the new square and moves its own figure from the old to the new square
+     */
     private void eat_figure(GameBoard gameboard, int row_old, int column_old, int row_new, int column_new, Player active_player){
         Figure temp = gameboard.squares[row_new][column_new].remove_figure();
         gameboard.squares[row_new][column_new].add_figure(gameboard.squares[row_old][column_old].remove_figure());
@@ -283,8 +318,6 @@ class Move {
             eaten_white_figures.add(temp);
         }
     }
-
-
-    }
+}
 
 
