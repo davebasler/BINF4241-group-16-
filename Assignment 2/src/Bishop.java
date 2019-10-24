@@ -2,7 +2,7 @@ public class Bishop extends Figure {
 
     private FigureType type;
 
-    public Bishop(Color color) {
+    Bishop(Color color) {
         super(color);
         this.type = FigureType.BISHOP;
     }

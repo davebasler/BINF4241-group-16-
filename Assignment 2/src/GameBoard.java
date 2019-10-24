@@ -1,8 +1,8 @@
 public class GameBoard {
 
-    public Square[][] squares = new Square[8][8];
+    Square[][] squares = new Square[8][8];
 
-    public Square[][] InitializeGameboard() {
+    Square[][] InitializeGameboard() {
         for (int i = 0; i < 8; i++) {
             if (i % 2 == 0) {
                 for (int j = 0; j < 8; j++){
@@ -72,7 +72,7 @@ public class GameBoard {
     }
 
 
-    public void PrintGameboardStatus(){
+    void PrintGameboardStatus(){
         System.out.println(".     a   b   c   d   e   f   g   h      .");                                //Prints the state of the board.
         System.out.println();
         for(int i = 0;i<8;i++){

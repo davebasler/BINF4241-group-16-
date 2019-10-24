@@ -3,7 +3,7 @@ public class Pawn extends Figure {
     private FigureType type;
     private int timer;
 
-    public Pawn(Color color) {
+    Pawn(Color color) {
         super(color);
         this.type = FigureType.PAWN;
         this.timer = 0;

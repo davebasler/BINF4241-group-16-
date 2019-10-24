@@ -1,12 +1,14 @@
 import java.util.*;
 
-public class Move {
-    boolean is_check=false;
-    boolean is_checkmate=false;
-    Eat eat = new Eat();
-    PossibleMoves possiblemoves = new PossibleMoves();
+class Move {
+    private boolean is_check=false;
+    private boolean is_checkmate=false;
 
-    public String move_figure(GameBoard gameboard, QuestionColumnDigit question, Player active_player){
+    private PossibleMoves possiblemoves = new PossibleMoves();
+    private List<Figure> eaten_black_figures = new ArrayList<Figure>();
+    private List<Figure> eaten_white_figures = new ArrayList<Figure>();
+
+    String move_figure(GameBoard gameboard, QuestionColumnDigit question, Player active_player){
         String active_player_name = active_player.get_name();
         Color active_player_color = active_player.get_color();
 
@@ -35,7 +37,7 @@ public class Move {
                 }
 
                 if (!temp) {
-                    if (gameboard.squares[old_row][old_column].get_figure().get_colour() != active_player_color.toString()) {
+                    if (!gameboard.squares[old_row][old_column].get_figure().get_colour().equals(active_player_color.toString())) {
                         System.out.println("There isn't a valid figure on this field!");
                         question.get_input(active_player_name);
                         old_column = question.get_old_column();
@@ -49,12 +51,12 @@ public class Move {
                     if (!gameboard.squares[old_row][old_column].get_figure().is_legal(old_row, old_column, new_row, new_column) ||
                             !gameboard.squares[old_row][old_column].get_figure().is_path_legal(gameboard, old_row, old_column, new_row, new_column) ||
                             (old_column == new_column && old_row == new_row) ||
-                            !eat.can_eat(gameboard, old_row, old_column, new_row, new_column)) {
+                            !can_eat(gameboard, old_row, old_column, new_row, new_column)) {
 
                         //special case if pawn can eat enemy diagonally
                         if (gameboard.squares[old_row][old_column].get_figure().get_type().equals(FigureType.PAWN.toString())
                                 && gameboard.squares[new_row][new_column].get_figure() != null) {
-                            if (gameboard.squares[new_row][new_column].get_figure().get_colour() != gameboard.squares[old_row][old_column].get_figure().get_colour()
+                            if (!gameboard.squares[new_row][new_column].get_figure().get_colour().equals(gameboard.squares[old_row][old_column].get_figure().get_colour())
                                     && gameboard.squares[old_row][old_column].get_figure().is_legal_eat_diagonal(old_row, old_column, new_row, new_column)) {
                                 break;
                             }
@@ -66,11 +68,11 @@ public class Move {
                             if (gameboard.squares[old_row][old_column].get_figure().is_legal_en_passant(old_row, old_column, new_row, new_column,gameboard)
                                     && gameboard.squares[old_row][old_column].get_figure().is_legal_eat_diagonal(old_row, old_column, new_row, new_column)) {
                                 if(old_column>new_column){
-                                    eat.eat_en_passant(gameboard, old_row, old_column - 1, active_player);
+                                    eat_en_passant(gameboard, old_row, old_column - 1, active_player);
                                     break;
                                 }
                                 else{
-                                    eat.eat_en_passant(gameboard, old_row, old_column + 1, active_player);
+                                    eat_en_passant(gameboard, old_row, old_column + 1, active_player);
                                     break;
                                 }
                             }
@@ -157,7 +159,7 @@ public class Move {
             if (gameboard.squares[new_row][new_column].get_figure() == null) {
                 gameboard.squares[new_row][new_column].add_figure(gameboard.squares[old_row][old_column].remove_figure());
             } else {
-                eat.eat_figure(gameboard, old_row, old_column, new_row, new_column, active_player);
+                eat_figure(gameboard, old_row, old_column, new_row, new_column, active_player);
             }
 
             if (gameboard.squares[new_row][new_column].get_figure().get_type().equals(FigureType.PAWN.toString())) {
@@ -188,13 +190,13 @@ public class Move {
         }
 
 
-    public void print_eaten_figures(){
+    void print_eaten_figures(){
         List<String> toprint_list_white = new ArrayList<>();
         List<String> toprint_list_black = new ArrayList<>();
-        for(Figure figure_white: eat.eaten_white_figures){
+        for(Figure figure_white: eaten_white_figures){
             toprint_list_white.add(figure_white.get_type());
         }
-        for(Figure figure_black: eat.eaten_black_figures){
+        for(Figure figure_black: eaten_black_figures){
             toprint_list_black.add(figure_black.get_type());
         }
         System.out.print("Eaten white figures: ");
@@ -204,7 +206,7 @@ public class Move {
 
 
     }
-    public void switch_pawn(GameBoard gameboard, int new_row, int new_column, Color current_player_color) {
+    private void switch_pawn(GameBoard gameboard, int new_row, int new_column, Color current_player_color) {
         String figure = "";
         boolean condition = false;
         while(!condition) {
@@ -235,6 +237,54 @@ public class Move {
 
             }
         }
+
+    private boolean can_eat(GameBoard gameboard, int row_old, int column_old, int row_new, int column_new){
+
+        if(gameboard.squares[row_new][column_new].get_figure()!=null){
+            if(gameboard.squares[row_old][column_old].get_figure().get_colour().equals(gameboard.squares[row_new][column_new].get_figure().get_colour())){
+                return false;
+            }
+            else if((gameboard.squares[row_old][column_old].get_figure().get_type().equals(FigureType.PAWN.toString()))   //Special case for pawn. It forbids the pawn to eat figures that are in front of him.
+                    &&(column_old==column_new)){
+                return false;
+            }
+
+            else
+            {
+                return true;
+            }
+        }
+
+        else{
+            return true;
+        }
+
+
+    }
+    private void eat_en_passant(GameBoard gameboard, int row_old, int column_old, Player active_player){
+        Figure temp = gameboard.squares[row_old][column_old].remove_figure();
+        active_player.add_eaten_piece();
+        if(temp.get_colour().equals(Color.BLACK.toString())){
+            eaten_black_figures.add(temp);
+        }
+        else{
+            eaten_white_figures.add(temp);
+        }
+    }
+
+    private void eat_figure(GameBoard gameboard, int row_old, int column_old, int row_new, int column_new, Player active_player){
+        Figure temp = gameboard.squares[row_new][column_new].remove_figure();
+        gameboard.squares[row_new][column_new].add_figure(gameboard.squares[row_old][column_old].remove_figure());
+        active_player.add_eaten_piece();
+        if(temp.get_colour().equals(Color.BLACK.toString())){
+            eaten_black_figures.add(temp);
+        }
+        else{
+            eaten_white_figures.add(temp);
+        }
+    }
+
+
     }
 
 

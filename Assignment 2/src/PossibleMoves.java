@@ -1,12 +1,12 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class PossibleMoves {
-    public List<Square> possible_moves_black = new ArrayList<Square>();
-    public List<Square> possible_moves_white = new ArrayList<Square>();
-    Eat eat = new Eat();
+class PossibleMoves {
+    private List<Square> possible_moves_black = new ArrayList<Square>();
+    private List<Square> possible_moves_white = new ArrayList<Square>();
 
-    public void update_figure_list(GameBoard gameboard) {
+
+    void update_figure_list(GameBoard gameboard) {
         ArrayList current_list; Figure figure;
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
@@ -27,7 +27,7 @@ public class PossibleMoves {
                                 else if (figure.is_legal(i, j, k, r) &&
                                         figure.is_path_legal(gameboard, i, j, k, r) &&
                                         (k != i || r != j) &&
-                                        eat.can_eat(gameboard, i, j, k, r)) {
+                                        can_eat(gameboard, i, j, k, r)) {
                                     current_list.add(gameboard.squares[k][r]);
                                 }
                             }
@@ -35,7 +35,7 @@ public class PossibleMoves {
                                 if ((figure.is_legal(i, j, k, r) &&
                                         figure.is_path_legal(gameboard, i, j, k, r) &&
                                         (k != i || r != j)) &&
-                                        eat.can_eat(gameboard, i, j, k, r)) {
+                                        can_eat(gameboard, i, j, k, r)) {
                                     current_list.add(gameboard.squares[k][r]);
                                 }
                             }
@@ -50,9 +50,9 @@ public class PossibleMoves {
     }
 
 
-    public ArrayList<Square> list= new ArrayList<Square>();
+    private ArrayList<Square> list= new ArrayList<Square>();
 
-    public void update_player_list(GameBoard gameboard, Color current_player_color) {
+    void update_player_list(GameBoard gameboard, Color current_player_color) {
         list.clear();
         if (current_player_color == Color.WHITE) {
             possible_moves_white.clear();
@@ -98,7 +98,7 @@ public class PossibleMoves {
         }
     }
 
-    public boolean is_check(GameBoard gameboard, Color current_player_color){
+    boolean is_check(GameBoard gameboard, Color current_player_color){
         if(current_player_color==Color.BLACK){
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
@@ -140,10 +140,10 @@ public class PossibleMoves {
         }
     }
 
-    public ArrayList<Square> king_moves= new ArrayList<Square>();
-    public ArrayList<Square> all_moves= new ArrayList<Square>();
+    private ArrayList<Square> king_moves= new ArrayList<Square>();
+    private ArrayList<Square> all_moves= new ArrayList<Square>();
 
-    public boolean is_checkmate(GameBoard gameboard, Color current_player_color){
+    boolean is_checkmate(GameBoard gameboard, Color current_player_color){
             if(current_player_color==Color.BLACK){
                 for (int i = 0; i < 8; i++) {
                     for (int j = 0; j < 8; j++) {
@@ -238,7 +238,7 @@ public class PossibleMoves {
                 return true;
             }
     }
-    public boolean is_suicide(Color player_color, GameBoard gameboard, int new_row, int new_column, int old_row, int old_column){
+    boolean is_suicide(Color player_color, GameBoard gameboard, int new_row, int new_column, int old_row, int old_column){
         if(gameboard.squares[old_row][old_column].get_figure().get_type()==FigureType.KING.toString()){
         if(player_color==Color.BLACK){
             for(Square square: possible_moves_white){
@@ -301,4 +301,29 @@ public class PossibleMoves {
         }
         return false;
     }
+    private boolean can_eat(GameBoard gameboard, int row_old, int column_old, int row_new, int column_new){
+
+        if(gameboard.squares[row_new][column_new].get_figure()!=null){
+            if(gameboard.squares[row_old][column_old].get_figure().get_colour()==
+                    gameboard.squares[row_new][column_new].get_figure().get_colour()){
+                return false;
+            }
+            else if((gameboard.squares[row_old][column_old].get_figure().get_type()==FigureType.PAWN.toString())   //Special case for pawn. It forbids the pawn to eat figures that are in front of him.
+                    &&(column_old==column_new)){
+                return false;
+            }
+
+            else
+            {
+                return true;
+            }
+        }
+
+        else{
+            return true;
+        }
+
+
+    }
+
 }

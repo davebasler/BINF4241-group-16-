@@ -2,7 +2,7 @@ public class Queen extends Figure {
 
     private FigureType type;
 
-    public Queen(Color color){
+    Queen(Color color){
         super(color);
         this.type = FigureType.QUEEN;
     }

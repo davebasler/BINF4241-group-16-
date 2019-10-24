@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public abstract class Figure {
 
     public Color color;
-    public ArrayList<Figure> figure_list;
+    private ArrayList<Figure> figure_list;
 
     public Figure(Color color) {
         this.color = color;
@@ -14,7 +14,7 @@ public abstract class Figure {
 
     public abstract String get_colour();
 
-    public ArrayList get_list(){
+    ArrayList get_list(){
         return this.figure_list;
     }
 

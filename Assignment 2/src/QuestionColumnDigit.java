@@ -1,8 +1,8 @@
 import java.util.Scanner;
 
-public class QuestionColumnDigit {
+class QuestionColumnDigit {
     private int old_row; private int old_column; private int new_row; private int new_column;
-    public void get_input(String player_name) {
+    void get_input(String player_name) {
         boolean temp2 = true;
         String input = "a2a3";
         old_row = 0;
@@ -51,16 +51,16 @@ public class QuestionColumnDigit {
         }
 
 
-    public int get_old_row(){
+    int get_old_row(){
         return old_row;
     }
-    public int get_old_column(){
+    int get_old_column(){
         return old_column;
     }
-    public int get_new_row(){
+    int get_new_row(){
         return new_row;
     }
-    public int get_new_column(){
+    int get_new_column(){
         return new_column;
     }
 

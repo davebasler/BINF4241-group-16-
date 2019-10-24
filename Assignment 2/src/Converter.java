@@ -1,7 +1,7 @@
-public class Converter {
+class Converter {
 
 
-    public int convert(char a){
+    int convert(char a){
 
         int i = (int) a;
 

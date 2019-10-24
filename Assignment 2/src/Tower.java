@@ -2,7 +2,7 @@ public class Tower extends Figure {
 
     private FigureType type;
 
-    public Tower(Color color) {
+    Tower(Color color) {
         super(color);
         this.type = FigureType.TOWER;
     }

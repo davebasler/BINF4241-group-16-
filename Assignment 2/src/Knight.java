@@ -2,7 +2,7 @@ public class Knight extends Figure {
 
     private FigureType type;
 
-    public Knight(Color color){
+    Knight(Color color){
         super(color);
         this.type = FigureType.KNIGHT;
     }

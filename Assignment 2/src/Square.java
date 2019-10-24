@@ -4,7 +4,7 @@ public class Square {
     private Figure figure;
     private FigureType type;
 
-    public Square(Color color){
+    Square(Color color){
         this.color = color;
         this.figure = null;
         this.type = FigureType.SQUARE;
@@ -14,21 +14,21 @@ public class Square {
         return this.type.toString();
     }
 
-    public boolean is_occupied(){
+    boolean is_occupied(){
         return this.figure != null;
 }
 
-    public void add_figure(Figure figure){
+    void add_figure(Figure figure){
         this.figure = figure;
     }
 
-    public Figure remove_figure(){
+    Figure remove_figure(){
         Figure temp = this.figure;
         this.figure = null;
         return temp;
     }
 
-    public Figure get_figure(){
+    Figure get_figure(){
         return this.figure;
     }
 }
