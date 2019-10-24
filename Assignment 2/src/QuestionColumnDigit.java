@@ -2,6 +2,13 @@ import java.util.Scanner;
 
 class QuestionColumnDigit {
     private int old_row; private int old_column; private int new_row; private int new_column;
+
+    /*
+    input: String
+    output: none
+    gets the input from the players in each round.
+    checks if the input format is valid. if not it starts over by asking for another input.
+     */
     void get_input(String player_name) {
         boolean temp2 = true;
         String input = "a2a3";
@@ -54,27 +61,16 @@ class QuestionColumnDigit {
     int get_old_row(){
         return old_row;
     }
+
     int get_old_column(){
         return old_column;
     }
+
     int get_new_row(){
         return new_row;
     }
     int get_new_column(){
         return new_column;
     }
-
-    /*public void move_figure_to(){
-        Scanner scan2 = new Scanner(System.in);
-        System.out.println("On which position do you want to place your figure?: ");
-        String input2 = scan2.next();
-
-        Converter convert = new Converter();
-        new_column = convert.convert(input2.charAt(0));
-        char temp = input2.charAt(1);
-        int char_as_int = Integer.parseInt(String.valueOf(temp));
-        new_row = Math.abs(char_as_int-8);
-    }
-    */
 }
 

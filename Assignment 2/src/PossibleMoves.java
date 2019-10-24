@@ -2,18 +2,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 class PossibleMoves {
-    /*
-    The "possible_moves_black" and "possible_moves_white" list contain all possible squares that all black respectively
-    white figures together can reach.
-     */
     private List<Square> possible_moves_black = new ArrayList<Square>();
     private List<Square> possible_moves_white = new ArrayList<Square>();
 
     /*
-    In the void update_figure_list(GameBoard gameboard) method we want to create for every figure a own list
-    that contains all squares where the figure could possibly move to. It should update every list after every move.
+    input: GameBoard
+    output: none
+    Updates each figures list of possible squares which it can move to currently.
      */
-
     void update_figure_list(GameBoard gameboard) {
         ArrayList current_list; Figure figure;
         for (int i = 0; i < 8; i++) {
@@ -54,16 +50,16 @@ class PossibleMoves {
                 }
             }
         }
-
     }
 
 
     private ArrayList<Square> list= new ArrayList<Square>();
 
     /*
-    The void update_player_list(...) method updates the "possible_moves_black" and "possible_moves_white" list after every move.
+    input: GameBoard, Color
+    output: none
+    Updates each players list of squares which can be reached currently.
      */
-
     void update_player_list(GameBoard gameboard, Color current_player_color) {
         list.clear();
         if (current_player_color == Color.WHITE) {
@@ -99,7 +95,6 @@ class PossibleMoves {
                                 if(!possible_moves_black.contains(square)){
                                     possible_moves_black.add(square);
                                 }
-
                             }
                         }
                     }
@@ -110,6 +105,14 @@ class PossibleMoves {
         }
     }
 
+    /*
+    input: GameBoard, Color
+    output: boolean
+    Returns true if there is a check currently, false if not. If it's the black players the check is for the white king
+    and vice versa.
+    => iterates through each square to find the king, checks if the square which has the king is in the the list of
+    possible player moves.
+     */
     boolean is_check(GameBoard gameboard, Color current_player_color){
         if(current_player_color==Color.BLACK){
             for (int i = 0; i < 8; i++) {
@@ -155,6 +158,13 @@ class PossibleMoves {
     private ArrayList<Square> king_moves= new ArrayList<Square>();
     private ArrayList<Square> all_moves= new ArrayList<Square>();
 
+    /*
+    input: GameBoard, Color
+    output: boolean
+    returns true if there is a checkmate, false if not.
+    => tests all possible moves by each figure of the respective color to see if there is a possibility to not have
+    get out of the check situation
+     */
     boolean is_checkmate(GameBoard gameboard, Color current_player_color){
             if(current_player_color==Color.BLACK){
                 for (int i = 0; i < 8; i++) {
@@ -250,6 +260,12 @@ class PossibleMoves {
                 return true;
             }
     }
+
+    /*
+    input: Color, GameBoard, int, int, int, int
+    output: boolean
+    returns true if a king suicide results of the proposed move, false if not.
+     */
     boolean is_suicide(Color player_color, GameBoard gameboard, int new_row, int new_column, int old_row, int old_column){
         if(gameboard.squares[old_row][old_column].get_figure().get_type()==FigureType.KING.toString()){
         if(player_color==Color.BLACK){
@@ -313,8 +329,14 @@ class PossibleMoves {
         }
         return false;
     }
-    private boolean can_eat(GameBoard gameboard, int row_old, int column_old, int row_new, int column_new){
 
+    /*
+    input: GameBoard, int, int, int, int
+    output: boolean
+    Returns true if player can eat the figure on the proposed square it would move on.
+    Special case for Pawn as it can not eat the figure in front of it.
+     */
+    private boolean can_eat(GameBoard gameboard, int row_old, int column_old, int row_new, int column_new){
         if(gameboard.squares[row_new][column_new].get_figure()!=null){
             if(gameboard.squares[row_old][column_old].get_figure().get_colour()==
                     gameboard.squares[row_new][column_new].get_figure().get_colour()){
@@ -324,18 +346,13 @@ class PossibleMoves {
                     &&(column_old==column_new)){
                 return false;
             }
-
             else
             {
                 return true;
             }
         }
-
         else{
             return true;
         }
-
-
     }
-
 }

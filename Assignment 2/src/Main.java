@@ -4,6 +4,9 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        /*
+        creates the gameboard, gets the players names, creates new moves class
+        */
         GameBoard gameboard = new GameBoard();
         gameboard.InitializeGameboard();
         gameboard.PrintGameboardStatus();
@@ -26,23 +29,20 @@ public class Main {
 
         gameboard.PrintGameboardStatus();
 
-
-
         Move move = new Move();
         QuestionColumnDigit question = new QuestionColumnDigit();
-        //Square square = new Square(Color.BLACK);
 
-        gameboard.PrintGameboardStatus();
-
+        /*
+        Game loop: lasts as long as the game is not over.
+        Game is over when move_figure method returns the name of the winner.
+        */
         boolean game_over = false;
         String winner_name="";
         while(!game_over){
             for(int i=0; i<2;i++){
                 Player active_player = players.get(i);
 
-
                 winner_name = move.move_figure(gameboard, question, active_player);
-
 
                 gameboard.PrintGameboardStatus();
                 move.print_eaten_figures();
@@ -51,7 +51,6 @@ public class Main {
                     game_over=true;
                     break;
                 }
-
             }
         }
 
