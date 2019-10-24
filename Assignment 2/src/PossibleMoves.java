@@ -80,7 +80,7 @@ class PossibleMoves {
                 }
             }
             int fig = possible_moves_white.size();
-            System.out.println("Number of possible moves of PLAYER WHITE: " + fig);
+            //System.out.println("Number of possible moves of PLAYER WHITE: " + fig);
         }
 
         else{
@@ -101,7 +101,7 @@ class PossibleMoves {
                 }
             }
             int fig = possible_moves_black.size();
-            System.out.println("Number of possible moves of PLAYER BLACK: " + fig);
+            //System.out.println("Number of possible moves of PLAYER BLACK: " + fig);
         }
     }
 
@@ -120,7 +120,6 @@ class PossibleMoves {
                     if(gameboard.squares[i][j].get_figure()!=null) {
                         if(gameboard.squares[i][j].get_figure().get_colour().equals(Color.WHITE.toString()) &&
                                 gameboard.squares[i][j].get_figure().get_type().equals(FigureType.KING.toString())){
-                            //System.out.println("CHESS!!!!");
                             for(Square square : possible_moves_black){
                                 if(square==gameboard.squares[i][j]){
                                     System.out.println("CHESS!!!!");

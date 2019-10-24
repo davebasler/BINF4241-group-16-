@@ -14,23 +14,46 @@ class Move {
   checks if the proposed move is legal, then executes the move, checks if the resulting board has a check or a checkmate
   situation. If the latter is true, the game is over and this method returns the name of the winner.
    */
-    String move_figure(GameBoard gameboard, UserInput user_input, Player active_player){
+    String move_figure(GameBoard gameboard, UserInput user_input, Player active_player) {
         String active_player_name = active_player.get_name();
         Color active_player_color = active_player.get_color();
+        boolean rochade_legal = false;
 
+        //get user input
         user_input.get_input(active_player_name);
         int old_row = user_input.get_old_row();
         int old_column = user_input.get_old_column();
         int new_column = user_input.get_new_column();
         int new_row = user_input.get_new_row();
 
-        if(old_row==-1){
+        //special case if small rochade (user input: 0-0)
+        if (old_row == -1) {
             System.out.println("Small Rochade");
+            rochade_legal = small_rochade(gameboard, active_player_color);
+            if (!rochade_legal) {
+                user_input.get_input(active_player_name);
+                old_row = user_input.get_old_row();
+                old_column = user_input.get_old_column();
+                new_column = user_input.get_new_column();
+                new_row = user_input.get_new_row();
+            }
         }
-        else if(old_row==-2){
-            System.out.println("Big Rochade");  //insert rochade function here
+
+        //special case if big rochade (user input: 0-0-0)
+        else if (old_row == -2) {
+            System.out.println("Big Rochade");
+            rochade_legal = big_rochade(gameboard, active_player_color);
+            if (!rochade_legal) {
+                user_input.get_input(active_player_name);
+                old_row = user_input.get_old_row();
+                old_column = user_input.get_old_column();
+                new_column = user_input.get_new_column();
+                new_row = user_input.get_new_row();
+            }
         }
-        else {
+
+        //normal part if no rochade before
+        if (!rochade_legal) {
             Boolean temp = true;
             while (temp) {
                 temp = false;
@@ -79,13 +102,12 @@ class Move {
                         //En passant
                         if (gameboard.squares[old_row][old_column].get_figure().get_type().equals(FigureType.PAWN.toString())
                                 && gameboard.squares[new_row][new_column].get_figure() == null) {
-                            if (gameboard.squares[old_row][old_column].get_figure().is_legal_en_passant(old_row, old_column, new_row, new_column,gameboard)
+                            if (gameboard.squares[old_row][old_column].get_figure().is_legal_en_passant(old_row, old_column, new_row, new_column, gameboard)
                                     && gameboard.squares[old_row][old_column].get_figure().is_legal_eat_diagonal(old_row, old_column, new_row, new_column)) {
-                                if(old_column>new_column){
+                                if (old_column > new_column) {
                                     eat_en_passant(gameboard, old_row, old_column - 1, active_player);
                                     break;
-                                }
-                                else{
+                                } else {
                                     eat_en_passant(gameboard, old_row, old_column + 1, active_player);
                                     break;
                                 }
@@ -102,19 +124,19 @@ class Move {
                 }
 
                 //check that king doesn't commit suicide
-                if(!temp){
-                        is_check = possiblemoves.is_suicide(active_player_color,gameboard,new_row,new_column,old_row,old_column);
-                        if (is_check) {
-                            temp = true;
-                            is_check = false;
-                            System.out.println("Your King can't commit suicide!");
-                            user_input.get_input(active_player_name);
-                            old_column = user_input.get_old_column();
-                            old_row = user_input.get_old_row();
-                            new_column = user_input.get_new_column();
-                            new_row = user_input.get_new_row();
-                        }
-                        }
+                if (!temp) {
+                    is_check = possiblemoves.is_suicide(active_player_color, gameboard, new_row, new_column, old_row, old_column);
+                    if (is_check) {
+                        temp = true;
+                        is_check = false;
+                        System.out.println("Your King can't commit suicide!");
+                        user_input.get_input(active_player_name);
+                        old_column = user_input.get_old_column();
+                        old_row = user_input.get_old_row();
+                        new_column = user_input.get_new_column();
+                        new_row = user_input.get_new_row();
+                    }
+                }
 
                 /*
                 if the king is currently in check, the new user input will only be accepted upon escaping the check
@@ -168,10 +190,12 @@ class Move {
                         }
                     }
                 }
-                }
             }
+        }
 
-            //player either eats enemy figure or moves to new square
+        if (!rochade_legal) {
+
+        //player either eats enemy figure or moves to new square
             if (gameboard.squares[new_row][new_column].get_figure() == null) {
                 gameboard.squares[new_row][new_column].add_figure(gameboard.squares[old_row][old_column].remove_figure());
             } else {
@@ -187,11 +211,11 @@ class Move {
             }
 
             //En passant move
-            int time= active_player.set_timer();
+            int time = active_player.set_timer();
             if (gameboard.squares[new_row][new_column].get_figure().get_type().equals(FigureType.PAWN.toString())) {
                 gameboard.squares[new_row][new_column].get_figure().set_timer(time);
             }
-
+        }
             possiblemoves.update_figure_list(gameboard);
             possiblemoves.update_player_list(gameboard, active_player_color);
             is_check = possiblemoves.is_check(gameboard, active_player_color);
@@ -205,6 +229,7 @@ class Move {
                 return "";
             }
         }
+
 
     /*
     input: none
@@ -318,6 +343,96 @@ class Move {
             eaten_white_figures.add(temp);
         }
     }
+
+    /*
+    input: GameBoard, Color
+    output: boolean
+    checks if the small rochade is legal, if so it executes the rochade and returns true, else nothing happens
+    and it returns false
+    */
+    public boolean small_rochade(GameBoard gameboard, Color player_color){
+        if(player_color==Color.BLACK){
+            if(gameboard.squares[0][4].get_figure()!=null && gameboard.squares[0][7].get_figure()!=null){
+                if(gameboard.squares[0][4].get_figure().get_type()==FigureType.KING.toString() &&
+                        gameboard.squares[0][4].get_figure().get_colour()==Color.BLACK.toString()) {
+                    if (gameboard.squares[0][7].get_figure().get_type() == FigureType.TOWER.toString() &&
+                            gameboard.squares[0][7].get_figure().get_colour() == Color.BLACK.toString()) {
+                        if (gameboard.squares[0][5].get_figure() == null) {
+                            if (gameboard.squares[0][6].get_figure() == null) {
+                                gameboard.squares[0][6].add_figure(gameboard.squares[0][4].remove_figure());
+                                gameboard.squares[0][5].add_figure(gameboard.squares[0][7].remove_figure());
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        else{
+            if(gameboard.squares[7][4].get_figure()!=null && gameboard.squares[7][7].get_figure()!=null) {
+                if (gameboard.squares[7][4].get_figure().get_type() == FigureType.KING.toString() &&
+                        gameboard.squares[7][4].get_figure().get_colour() == Color.WHITE.toString()) {
+                    if (gameboard.squares[7][7].get_figure().get_type() == FigureType.TOWER.toString() &&
+                            gameboard.squares[7][7].get_figure().get_colour() == Color.WHITE.toString()) {
+                        if (gameboard.squares[7][5].get_figure() == null) {
+                            if (gameboard.squares[7][6].get_figure() == null) {
+                                gameboard.squares[7][6].add_figure(gameboard.squares[7][4].remove_figure());
+                                gameboard.squares[7][5].add_figure(gameboard.squares[7][7].remove_figure());
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    /*
+    input: GameBoard, Color
+    output: boolean
+    checks if the big rochade is legal, if so it executes the rochade and returns true, else nothing happens
+    and it returns false
+    */
+    public boolean big_rochade(GameBoard gameboard, Color player_color){
+        if(player_color==Color.BLACK){
+            if(gameboard.squares[0][4].get_figure()!=null && gameboard.squares[0][0].get_figure()!=null){
+                if(gameboard.squares[0][4].get_figure().get_type()==FigureType.KING.toString() &&
+                        gameboard.squares[0][4].get_figure().get_colour()==Color.BLACK.toString()) {
+                    if (gameboard.squares[0][0].get_figure().get_type() == FigureType.TOWER.toString() &&
+                            gameboard.squares[0][0].get_figure().get_colour() == Color.BLACK.toString()) {
+                        if (gameboard.squares[0][1].get_figure() == null) {
+                            if (gameboard.squares[0][2].get_figure() == null) {
+                                if (gameboard.squares[0][3].get_figure() == null) {
+                                    gameboard.squares[0][2].add_figure(gameboard.squares[0][4].remove_figure());
+                                    gameboard.squares[0][3].add_figure(gameboard.squares[0][0].remove_figure());
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        else{
+            if(gameboard.squares[7][4].get_figure()!=null && gameboard.squares[7][0].get_figure()!=null){
+                if(gameboard.squares[7][4].get_figure().get_type()==FigureType.KING.toString() &&
+                        gameboard.squares[7][4].get_figure().get_colour()==Color.WHITE.toString()) {
+                    if (gameboard.squares[7][0].get_figure().get_type() == FigureType.TOWER.toString() &&
+                            gameboard.squares[7][0].get_figure().get_colour() == Color.WHITE.toString()) {
+                        if (gameboard.squares[7][1].get_figure() == null) {
+                            if (gameboard.squares[7][2].get_figure() == null) {
+                                if (gameboard.squares[7][3].get_figure() == null) {
+                                    gameboard.squares[7][2].add_figure(gameboard.squares[7][4].remove_figure());
+                                    gameboard.squares[7][3].add_figure(gameboard.squares[7][0].remove_figure());
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
 }
-
-
