@@ -4,8 +4,7 @@ public class GameBoard {
 
     /* Square[][] InitializeGameboard() initializes the gameboard with 8x8 (black and white) squares and spawns the
     figures on the corresponding field.
-     */
-
+    */
     Square[][] InitializeGameboard() {
         for (int i = 0; i < 8; i++) {
             if (i % 2 == 0) {
@@ -77,8 +76,7 @@ public class GameBoard {
 
     /*
     Prints the state of the board with all figures that may have changed their position.
-     */
-
+    */
     void PrintGameboardStatus(){
         System.out.println(".     a   b   c   d   e   f   g   h      .");
         System.out.println();

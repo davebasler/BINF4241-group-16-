@@ -122,7 +122,7 @@ class PossibleMoves {
                                 gameboard.squares[i][j].get_figure().get_type().equals(FigureType.KING.toString())){
                             for(Square square : possible_moves_black){
                                 if(square==gameboard.squares[i][j]){
-                                    System.out.println("CHESS!!!!");
+                                    //System.out.println("CHESS!!!!");
                                     return true;
                                 }
                             }
@@ -130,7 +130,7 @@ class PossibleMoves {
                     }
                 }
             }
-            System.out.println("NOT CHESS!!!!");
+            //System.out.println("NOT CHESS!!!!");
             return false;
         }
         else{
@@ -141,7 +141,7 @@ class PossibleMoves {
                                 gameboard.squares[i][j].get_figure().get_type().equals(FigureType.KING.toString())){
                             for(Square square : possible_moves_white){
                                 if(square==gameboard.squares[i][j]){
-                                    System.out.println("CHESS!!!!");
+                                    //System.out.println("CHESS!!!!");
                                     return true;
                                 }
                             }
@@ -149,7 +149,7 @@ class PossibleMoves {
                     }
                 }
             }
-            System.out.println("NOT CHESS!!!!");
+            //System.out.println("NOT CHESS!!!!");
             return false;
         }
     }
@@ -174,7 +174,7 @@ class PossibleMoves {
                                 king_moves = gameboard.squares[i][j].get_figure().get_list();
                                 for(Square square : king_moves){
                                     if(!possible_moves_black.contains(square)){
-                                        System.out.println("NOT CHECKMATE!!!!");
+                                        //System.out.println("NOT CHECKMATE!!!!");
                                         return false;
                                     }
                                 }
@@ -195,7 +195,7 @@ class PossibleMoves {
                                                 if(!check_if_check){
                                                     gameboard.squares[k][r].remove_figure();
                                                     gameboard.squares[i][j].add_figure(temp_figure);
-                                                    System.out.println("NOT CHECKMATE!!!!");
+                                                    //System.out.println("NOT CHECKMATE!!!!");
                                                     return false;
                                                 }
                                                 gameboard.squares[k][r].remove_figure();
@@ -208,7 +208,7 @@ class PossibleMoves {
                         }
                     }
                 }
-                System.out.println("CHECKMATE!!!!");
+                //System.out.println("CHECKMATE!!!!");
                 return true;
             }
             else{
@@ -220,7 +220,7 @@ class PossibleMoves {
                                 king_moves = gameboard.squares[i][j].get_figure().get_list();
                                 for(Square square : king_moves){
                                     if(!possible_moves_white.contains(square)){
-                                        System.out.println("NOT CHECKMATE!!!!");
+                                        //System.out.println("NOT CHECKMATE1!!!!");
                                         return false;
                                     }
                                 }
@@ -242,7 +242,7 @@ class PossibleMoves {
                                             if (!check_if_check) {
                                                 gameboard.squares[k][r].remove_figure();
                                                 gameboard.squares[i][j].add_figure(temp_figure);
-                                                System.out.println("NOT CHECKMATE!!!!");
+                                                //System.out.println("NOT CHECKMATE2!!!!");
                                                 return false;
                                             }
                                             gameboard.squares[k][r].remove_figure();
@@ -255,7 +255,7 @@ class PossibleMoves {
                         }
                     }
                 }
-                System.out.println("CHECKMATE!!!!");
+                //System.out.println("CHECKMATE3!!!!");
                 return true;
             }
     }

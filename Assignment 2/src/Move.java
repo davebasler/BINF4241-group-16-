@@ -359,9 +359,12 @@ class Move {
                             gameboard.squares[0][7].get_figure().get_colour() == Color.BLACK.toString()) {
                         if (gameboard.squares[0][5].get_figure() == null) {
                             if (gameboard.squares[0][6].get_figure() == null) {
-                                gameboard.squares[0][6].add_figure(gameboard.squares[0][4].remove_figure());
-                                gameboard.squares[0][5].add_figure(gameboard.squares[0][7].remove_figure());
-                                return true;
+                                //check if king commits suicide
+                                if (!possiblemoves.is_suicide(player_color, gameboard, 0,6,0,4)) {
+                                    gameboard.squares[0][6].add_figure(gameboard.squares[0][4].remove_figure());
+                                    gameboard.squares[0][5].add_figure(gameboard.squares[0][7].remove_figure());
+                                    return true;
+                                }
                             }
                         }
                     }
@@ -376,9 +379,12 @@ class Move {
                             gameboard.squares[7][7].get_figure().get_colour() == Color.WHITE.toString()) {
                         if (gameboard.squares[7][5].get_figure() == null) {
                             if (gameboard.squares[7][6].get_figure() == null) {
-                                gameboard.squares[7][6].add_figure(gameboard.squares[7][4].remove_figure());
-                                gameboard.squares[7][5].add_figure(gameboard.squares[7][7].remove_figure());
-                                return true;
+                                //check if king commits suicide
+                                if (!possiblemoves.is_suicide(player_color, gameboard, 7, 6, 7, 4)) {
+                                    gameboard.squares[7][6].add_figure(gameboard.squares[7][4].remove_figure());
+                                    gameboard.squares[7][5].add_figure(gameboard.squares[7][7].remove_figure());
+                                    return true;
+                                }
                             }
                         }
                     }
@@ -404,9 +410,11 @@ class Move {
                         if (gameboard.squares[0][1].get_figure() == null) {
                             if (gameboard.squares[0][2].get_figure() == null) {
                                 if (gameboard.squares[0][3].get_figure() == null) {
-                                    gameboard.squares[0][2].add_figure(gameboard.squares[0][4].remove_figure());
-                                    gameboard.squares[0][3].add_figure(gameboard.squares[0][0].remove_figure());
-                                    return true;
+                                    if (!possiblemoves.is_suicide(player_color, gameboard, 0, 2, 0, 4)) {
+                                        gameboard.squares[0][2].add_figure(gameboard.squares[0][4].remove_figure());
+                                        gameboard.squares[0][3].add_figure(gameboard.squares[0][0].remove_figure());
+                                        return true;
+                                    }
                                 }
                             }
                         }
@@ -423,9 +431,11 @@ class Move {
                         if (gameboard.squares[7][1].get_figure() == null) {
                             if (gameboard.squares[7][2].get_figure() == null) {
                                 if (gameboard.squares[7][3].get_figure() == null) {
-                                    gameboard.squares[7][2].add_figure(gameboard.squares[7][4].remove_figure());
-                                    gameboard.squares[7][3].add_figure(gameboard.squares[7][0].remove_figure());
-                                    return true;
+                                    if (!possiblemoves.is_suicide(player_color, gameboard, 7, 2, 7, 4)) {
+                                        gameboard.squares[7][2].add_figure(gameboard.squares[7][4].remove_figure());
+                                        gameboard.squares[7][3].add_figure(gameboard.squares[7][0].remove_figure());
+                                        return true;
+                                    }
                                 }
                             }
                         }
