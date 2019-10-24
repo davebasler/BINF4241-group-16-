@@ -32,6 +32,16 @@ public class Eat {
 
     }
 
+    public void eat_en_passant(GameBoard gameboard, int row_old, int column_old, Player active_player){
+        Figure temp = gameboard.squares[row_old][column_old].remove_figure();
+        active_player.add_eaten_piece();
+        if(temp.get_colour()==Color.BLACK.toString()){
+            eaten_black_figures.add(temp);
+        }
+        else{
+            eaten_white_figures.add(temp);
+        }
+    }
 
     public void eat_figure(GameBoard gameboard, int row_old, int column_old, int row_new, int column_new, Player active_player){
         Figure temp = gameboard.squares[row_new][column_new].remove_figure();

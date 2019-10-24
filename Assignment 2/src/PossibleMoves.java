@@ -238,4 +238,67 @@ public class PossibleMoves {
                 return true;
             }
     }
+    public boolean is_suicide(Color player_color, GameBoard gameboard, int new_row, int new_column, int old_row, int old_column){
+        if(gameboard.squares[old_row][old_column].get_figure().get_type()==FigureType.KING.toString()){
+        if(player_color==Color.BLACK){
+            for(Square square: possible_moves_white){
+                if(square==gameboard.squares[new_row][new_column]){
+                    return true;
+                }
+            }
+        }
+        else{
+            for(Square square: possible_moves_black){
+                if(square==gameboard.squares[new_row][new_column]){
+                    return true;
+                }
+            }
+        }
+        }
+        else{
+            Figure temp_figure;
+            Figure eaten_figure_temp = null;
+            if (gameboard.squares[new_row][new_column].get_figure() == null) {
+                temp_figure = gameboard.squares[old_row][old_column].remove_figure();
+                gameboard.squares[new_row][new_column].add_figure(temp_figure);
+            } else {
+                temp_figure = gameboard.squares[old_row][old_column].remove_figure();
+                eaten_figure_temp = gameboard.squares[new_row][new_column].remove_figure();
+                gameboard.squares[new_row][new_column].add_figure(temp_figure);
+            }
+
+            update_figure_list(gameboard);
+            update_player_list(gameboard, Color.BLACK);
+            update_player_list(gameboard, Color.WHITE);
+
+
+            boolean is_check;
+            if (player_color == Color.BLACK) {
+                is_check = is_check(gameboard, Color.WHITE);
+            } else {
+                is_check = is_check(gameboard, Color.BLACK);
+            }
+            if (is_check) {
+                if (eaten_figure_temp == null) {
+                    gameboard.squares[new_row][new_column].remove_figure();
+                    gameboard.squares[old_row][old_column].add_figure(temp_figure);
+                } else {
+                    gameboard.squares[new_row][new_column].remove_figure();
+                    gameboard.squares[new_row][new_column].add_figure(eaten_figure_temp);
+                    gameboard.squares[old_row][old_column].add_figure(temp_figure);
+                }
+               return true;
+            } else {
+                if (eaten_figure_temp == null) {
+                    gameboard.squares[new_row][new_column].remove_figure();
+                    gameboard.squares[old_row][old_column].add_figure(temp_figure);
+                } else {
+                    gameboard.squares[new_row][new_column].remove_figure();
+                    gameboard.squares[new_row][new_column].add_figure(eaten_figure_temp);
+                    gameboard.squares[old_row][old_column].add_figure(temp_figure);
+                }
+            }
+        }
+        return false;
+    }
 }

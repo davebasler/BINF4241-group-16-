@@ -59,6 +59,23 @@ public class Move {
                                 break;
                             }
                         }
+
+                        //En passant
+                        if (gameboard.squares[old_row][old_column].get_figure().get_type().equals(FigureType.PAWN.toString())
+                                && gameboard.squares[new_row][new_column].get_figure() == null) {
+                            if (gameboard.squares[old_row][old_column].get_figure().is_legal_en_passant(old_row, old_column, new_row, new_column,gameboard)
+                                    && gameboard.squares[old_row][old_column].get_figure().is_legal_eat_diagonal(old_row, old_column, new_row, new_column)) {
+                                if(old_column>new_column){
+                                    eat.eat_en_passant(gameboard, old_row, old_column - 1, active_player);
+                                    break;
+                                }
+                                else{
+                                    eat.eat_en_passant(gameboard, old_row, old_column + 1, active_player);
+                                    break;
+                                }
+                            }
+                        }
+
                         temp = true;
 
                         System.out.println("You can't move this figure to this field!");
@@ -67,6 +84,22 @@ public class Move {
                         old_row = question.get_old_row();
                     }
                 }
+
+                //check that king doesn't commit suicide
+                if(!temp){
+                        is_check = possiblemoves.is_suicide(active_player_color,gameboard,new_row,new_column,old_row,old_column);
+                        if (is_check) {
+                            temp = true;
+                            is_check = false;
+                            System.out.println("Your King can't commit suicide!");
+                            question.get_input(active_player_name);
+                            old_column = question.get_old_column();
+                            old_row = question.get_old_row();
+                            new_column = question.get_new_column();
+                            new_row = question.get_new_row();
+                        }
+                        }
+
 
                 while (is_check) {
                     Figure temp_figure;
@@ -118,8 +151,8 @@ public class Move {
                         }
                     }
                 }
+                }
             }
-
 
             if (gameboard.squares[new_row][new_column].get_figure() == null) {
                 gameboard.squares[new_row][new_column].add_figure(gameboard.squares[old_row][old_column].remove_figure());
@@ -133,6 +166,13 @@ public class Move {
                     switch_pawn(gameboard, new_row, new_column, active_player_color);
                 }
             }
+
+            //En passant
+        int time= active_player.set_timer();
+        if (gameboard.squares[new_row][new_column].get_figure().get_type().equals(FigureType.PAWN.toString())) {
+            gameboard.squares[new_row][new_column].get_figure().set_timer(time);
+        }
+
             possiblemoves.update_figure_list(gameboard);
             possiblemoves.update_player_list(gameboard, active_player_color);
             is_check = possiblemoves.is_check(gameboard, active_player_color);
@@ -146,8 +186,7 @@ public class Move {
                 return "";
             }
         }
-        return "";
-    }
+
 
     public void print_eaten_figures(){
         List<String> toprint_list_white = new ArrayList<>();

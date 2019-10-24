@@ -27,6 +27,16 @@ public abstract class Figure {
     public Boolean is_legal_eat_diagonal(int row_old, int column_old, int row_new, int column_new) {
         return null;
     }
+
+    //special methods for pawn and en passant
+    public int get_timer(){
+        return 0;
+    }
+    public void set_timer(int time){
+    }
+    public Boolean is_legal_en_passant(int row_old, int column_old, int row_new, int column_new, GameBoard gameboard){
+        return null;
+    }
 }
 
 

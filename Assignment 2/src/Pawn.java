@@ -1,10 +1,19 @@
 public class Pawn extends Figure {
 
     private FigureType type;
+    private int timer;
 
     public Pawn(Color color) {
         super(color);
         this.type = FigureType.PAWN;
+        this.timer = 0;
+    }
+
+    public int get_timer(){
+        return this.timer;
+    }
+    public void set_timer(int time){
+        this.timer = time;
     }
 
     public String get_type() {
@@ -23,6 +32,42 @@ public class Pawn extends Figure {
             return (row_new - row_old) == 1 && Math.abs(column_new-column_old) == 1;
         }
 }
+
+    public Boolean is_legal_en_passant(int row_old, int column_old, int row_new, int column_new, GameBoard gameboard){
+        if(gameboard.squares[row_old][column_old].get_figure().get_colour()==Color.BLACK.toString()) {
+            if (gameboard.squares[row_old][column_old-1].get_figure() != null) {
+                if (gameboard.squares[row_old][column_old - 1].get_figure().get_colour() == Color.WHITE.toString()
+                && gameboard.squares[row_old][column_old-1].get_figure().get_type() == FigureType.PAWN.toString()
+                && 1==Math.abs((gameboard.squares[row_old][column_old-1].get_figure().get_timer())-(gameboard.squares[row_old][column_old].get_figure().get_timer()))){
+                    return true;
+                }
+            }
+            else if(gameboard.squares[row_old][column_old+1].get_figure() != null) {
+                if (gameboard.squares[row_old][column_old +1].get_figure().get_colour() == Color.WHITE.toString()
+                        && gameboard.squares[row_old][column_old+1].get_figure().get_type() == FigureType.PAWN.toString()
+                        && 1==Math.abs((gameboard.squares[row_old][column_old+1].get_figure().get_timer())-(gameboard.squares[row_old][column_old].get_figure().get_timer()))){
+                    return true;
+                }
+            }
+        }
+       else {
+            if (gameboard.squares[row_old][column_old-1].get_figure() != null) {
+                if (gameboard.squares[row_old][column_old - 1].get_figure().get_colour() == Color.BLACK.toString()
+                        && gameboard.squares[row_old][column_old-1].get_figure().get_type() == FigureType.PAWN.toString()
+                        && 1==Math.abs((gameboard.squares[row_old][column_old-1].get_figure().get_timer())-(gameboard.squares[row_old][column_old].get_figure().get_timer()))){
+                    return true;
+                }
+            }
+            else if(gameboard.squares[row_old][column_old+1].get_figure() != null) {
+                if (gameboard.squares[row_old][column_old +1].get_figure().get_colour() == Color.BLACK.toString()
+                        && gameboard.squares[row_old][column_old+1].get_figure().get_type() == FigureType.PAWN.toString()
+                        && 1==Math.abs((gameboard.squares[row_old][column_old+1].get_figure().get_timer())-(gameboard.squares[row_old][column_old].get_figure().get_timer()))){
+                    return true;
+                }
+            }
+        }
+       return false;
+    }
 
     @Override
     public boolean is_legal(int row_old, int column_old, int row_new, int column_new) {
