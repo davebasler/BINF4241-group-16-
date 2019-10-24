@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c0c84fc0-ea7a-4f98-a3ce-764d0e105340" name="Default Changelist" comment="" />
+    <list default="true" id="c0c84fc0-ea7a-4f98-a3ce-764d0e105340" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Figure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Figure.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pawn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pawn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PossibleMoves.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PossibleMoves.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,6 +100,7 @@
       <workItem from="1571571454305" duration="18063000" />
       <workItem from="1571816575814" duration="18456000" />
       <workItem from="1571836549184" duration="2282000" />
+      <workItem from="1571936512507" duration="1785000" />
     </task>
     <servers />
   </component>

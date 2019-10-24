@@ -18,9 +18,15 @@ public abstract class Figure {
         return this.figure_list;
     }
 
-
+   /*
+   public abstract boolean is_legal(...) is implemented in each figure and it is responsible for the right move of each figure
+   */
     public abstract boolean is_legal(int row_old, int column_old, int row_new, int column_new);
 
+    /*
+    public abstract boolean is_legal_legal(...) checks in each figure if there is an obstacle on the path where
+    the corresponding wants to move
+    */
     public abstract boolean is_path_legal(GameBoard gameboard, int row_old, int column_old, int row_new, int column_new);
 
     //special method for pawn when it can eat another player diagonally

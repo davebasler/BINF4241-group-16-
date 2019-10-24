@@ -69,6 +69,11 @@ public class Pawn extends Figure {
        return false;
     }
 
+    /*
+    Here the is_legal(...) method is special, because it looks that the pawn can only move one field forward.
+    The only exception is in the first move, where he can jump two fields ahead.
+     */
+
     @Override
     public boolean is_legal(int row_old, int column_old, int row_new, int column_new) {
         if (this.color == color.BLACK && row_new > row_old && row_old==1) {

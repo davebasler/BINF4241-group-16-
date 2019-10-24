@@ -2,9 +2,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 class PossibleMoves {
+    /*
+    The "possible_moves_black" and "possible_moves_white" list contain all possible squares that all black respectively
+    white figures together can reach.
+     */
     private List<Square> possible_moves_black = new ArrayList<Square>();
     private List<Square> possible_moves_white = new ArrayList<Square>();
 
+    /*
+    In the void update_figure_list(GameBoard gameboard) method we want to create for every figure a own list
+    that contains all squares where the figure could possibly move to. It should update every list after every move.
+     */
 
     void update_figure_list(GameBoard gameboard) {
         ArrayList current_list; Figure figure;
@@ -51,6 +59,10 @@ class PossibleMoves {
 
 
     private ArrayList<Square> list= new ArrayList<Square>();
+
+    /*
+    The void update_player_list(...) method updates the "possible_moves_black" and "possible_moves_white" list after every move.
+     */
 
     void update_player_list(GameBoard gameboard, Color current_player_color) {
         list.clear();
