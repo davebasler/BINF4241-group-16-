@@ -9,11 +9,11 @@
 ## Part 2 <br/>
 ### 1. Sequence diagram <br/>
 
-Title: Here is a title
-A->B: Normal line
-B-->C: Dashed line
-C->>D: Open arrow
-D-->>A: Dashed open arrow
+​```sequence
+Alice->Bob: Hello Bob, how are you?
+Note right of Bob: Bob thinks
+Bob-->Alice: I am good thanks!
+​```
 
 ## Part 3 <br/>
 ### 1. Description <br/>
