@@ -1,8 +1,15 @@
-## Assignment 3 <br/>
-Standard user input should have the following format --> <br/>
-**(letter of origin column)(digit of origin row)(letter of destination column)(digit of destination row)** <br/>
-<br/> 
-example: **a2a4** (move Pawn on a2 to a4) <br/> <br/> 
-User input for special moves are the following: --><br/> 
-Small rochade (castling): **0-0**<br/> 
-Large rochade (castling): **0-0-0**
+# Assignment 3 <br/>
+## Part 1 <br/>
+### 1. Description <br/>
+
+### 2. Class diagram <br/>
+
+### 3. Sequence diagram <br/>
+
+## Part 2 <br/>
+### 1. Sequence diagram <br/>
+
+## Part 3 <br/>
+### 1. Description <br/>
+
+### 2. Notation <br/>
