@@ -1,8 +1,9 @@
-class Player {
+class Player implements PlayerInterface{
     private String name;
     private Color color;
     private int eaten_pieces;
     private static int timer=0;
+
 
     /*
     input: String, Color
@@ -40,5 +41,20 @@ class Player {
     public int set_timer(){
         timer++;
         return timer;
+    }
+
+    @Override
+    public void registerObserver() {
+        
+    }
+
+    @Override
+    public void removeObserver() {
+
+    }
+
+    @Override
+    public void notifyObserver() {
+
     }
 }
