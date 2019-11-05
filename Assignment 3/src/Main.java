@@ -31,6 +31,8 @@ public class Main {
 
         Move move = new Move();
         UserInput userinput = new UserInput();
+        ScoreBoard scoreBoard = new ScoreBoard();
+        move.registerObserver(scoreBoard);
 
         /*
         Game loop: lasts as long as the game is not over.
@@ -45,6 +47,7 @@ public class Main {
                 winner_name = move.move_figure(gameboard, userinput, active_player);
 
                 gameboard.PrintGameboardStatus();
+                scoreBoard.displayScores();
                 move.print_eaten_figures();
                 if(!winner_name.equals("")){
                     System.out.println(winner_name+" wins!");

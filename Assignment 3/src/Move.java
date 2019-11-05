@@ -1,6 +1,6 @@
 import java.util.*;
 
-class Move {
+class Move implements MoveInterface {
     private boolean is_check=false;
     private boolean is_checkmate=false;
 
@@ -338,9 +338,21 @@ class Move {
         active_player.add_eaten_piece();
         if(temp.get_colour().equals(Color.BLACK.toString())){
             eaten_black_figures.add(temp);
+            if(temp.get_type().equals(FigureType.QUEEN.toString())){
+                notifyObserver(0,5);
+            }
+            else{
+                notifyObserver(0,1);
+            }
         }
         else{
             eaten_white_figures.add(temp);
+            if(temp.get_type().equals(FigureType.QUEEN.toString())){
+                notifyObserver(5,0);
+            }
+            else{
+                notifyObserver(1,0);
+            }
         }
     }
 
@@ -445,4 +457,23 @@ class Move {
         }
         return false;
     }
+
+    private List <ScoreBoard> scoreBoardlist = new ArrayList<ScoreBoard>();
+    @Override
+    public void registerObserver(ScoreBoard scoreBoard) {
+        scoreBoardlist.add(scoreBoard);
+    }
+
+    @Override
+    public void removeObserver(ScoreBoard scoreBoard) {
+    scoreBoardlist.remove(scoreBoard);
+    }
+
+    @Override
+    public void notifyObserver(int scorePlayer1, int scorePlayer2) {
+        for(ScoreBoard element : scoreBoardlist){
+            element.updateScorePlayer(scorePlayer1, scorePlayer2);
+        }
+    }
+
 }

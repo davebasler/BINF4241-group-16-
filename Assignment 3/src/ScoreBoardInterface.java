@@ -1,3 +1,3 @@
 public interface ScoreBoardInterface {
-    void update();
+    void updateScorePlayer(int scorePlayer1, int scorePlayer2);
 }

@@ -1,4 +1,4 @@
-class Player implements PlayerInterface{
+class Player{
     private String name;
     private Color color;
     private int eaten_pieces;
@@ -43,18 +43,4 @@ class Player implements PlayerInterface{
         return timer;
     }
 
-    @Override
-    public void registerObserver() {
-        
-    }
-
-    @Override
-    public void removeObserver() {
-
-    }
-
-    @Override
-    public void notifyObserver() {
-
-    }
 }
