@@ -7,7 +7,7 @@ public class Main {
         /*
         creates the gameboard, gets the players names, creates new moves class
         */
-        GameBoard gameboard = new GameBoard();
+        GameBoard gameboard = GameBoard.getInstance();
         gameboard.InitializeGameboard();
         gameboard.PrintGameboardStatus();
 

@@ -1,10 +1,21 @@
 public class GameBoard {
 
+    private static GameBoard uniqueInstance;
+    private GameBoard(){}
+
+    public static synchronized GameBoard getInstance(){
+        if(uniqueInstance==null){
+            uniqueInstance = new GameBoard();
+        }
+        return uniqueInstance;
+    }
+
     Square[][] squares = new Square[8][8];
 
     /* Square[][] InitializeGameboard() initializes the gameboard with 8x8 (black and white) squares and spawns the
     figures on the corresponding field.
     */
+
     Square[][] InitializeGameboard() {
         for (int i = 0; i < 8; i++) {
             if (i % 2 == 0) {
