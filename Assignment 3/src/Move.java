@@ -195,7 +195,7 @@ class Move implements MoveInterface {
 
         if (!rochade_legal) {
 
-        //player either eats enemy figure or moves to new square
+            //player either eats enemy figure or moves to new square
             if (gameboard.squares[new_row][new_column].get_figure() == null) {
                 gameboard.squares[new_row][new_column].add_figure(gameboard.squares[old_row][old_column].remove_figure());
             } else {
@@ -216,19 +216,19 @@ class Move implements MoveInterface {
                 gameboard.squares[new_row][new_column].get_figure().set_timer(time);
             }
         }
-            possiblemoves.update_figure_list(gameboard);
-            possiblemoves.update_player_list(gameboard, active_player_color);
-            is_check = possiblemoves.is_check(gameboard, active_player_color);
-            if (is_check) {
-                is_checkmate = possiblemoves.is_checkmate(gameboard, active_player_color);
-            }
-
-            if (is_checkmate) {
-                return active_player_name;
-            } else {
-                return "";
-            }
+        possiblemoves.update_figure_list(gameboard);
+        possiblemoves.update_player_list(gameboard, active_player_color);
+        is_check = possiblemoves.is_check(gameboard, active_player_color);
+        if (is_check) {
+            is_checkmate = possiblemoves.is_checkmate(gameboard, active_player_color);
         }
+
+        if (is_checkmate) {
+            return active_player_name;
+        } else {
+            return "";
+        }
+    }
 
 
     /*
@@ -270,21 +270,21 @@ class Move implements MoveInterface {
         }
 
         gameboard.squares[new_row][new_column].remove_figure();
-            switch (figure) {
-                case "Bishop":
-                    gameboard.squares[new_row][new_column].add_figure(new Bishop(current_player_color));
-                    break;
-                case "Night":
-                    gameboard.squares[new_row][new_column].add_figure(new Knight(current_player_color));
-                    break;
-                case "Queen":
-                    gameboard.squares[new_row][new_column].add_figure(new Queen(current_player_color));
-                    break;
-                case "Tower":
-                    gameboard.squares[new_row][new_column].add_figure(new Tower(current_player_color));
-                    break;
-            }
+        switch (figure) {
+            case "Bishop":
+                gameboard.squares[new_row][new_column].add_figure(new Bishop(current_player_color));
+                break;
+            case "Night":
+                gameboard.squares[new_row][new_column].add_figure(new Knight(current_player_color));
+                break;
+            case "Queen":
+                gameboard.squares[new_row][new_column].add_figure(new Queen(current_player_color));
+                break;
+            case "Tower":
+                gameboard.squares[new_row][new_column].add_figure(new Tower(current_player_color));
+                break;
         }
+    }
 
     /*
      input: GameBoard, int, int, int, int
@@ -327,11 +327,11 @@ class Move implements MoveInterface {
         }
     }
 
-     /*
-     input: GameBoard, int, int, int, int, Player
-     output: none
-     player eats the enemy figure on the new square and moves its own figure from the old to the new square
-     */
+    /*
+    input: GameBoard, int, int, int, int, Player
+    output: none
+    player eats the enemy figure on the new square and moves its own figure from the old to the new square
+    */
     private void eat_figure(GameBoard gameboard, int row_old, int column_old, int row_new, int column_new, Player active_player){
         Figure temp = gameboard.squares[row_new][column_new].remove_figure();
         gameboard.squares[row_new][column_new].add_figure(gameboard.squares[row_old][column_old].remove_figure());
@@ -466,7 +466,7 @@ class Move implements MoveInterface {
 
     @Override
     public void removeObserver(ScoreBoard scoreBoard) {
-    scoreBoardlist.remove(scoreBoard);
+        scoreBoardlist.remove(scoreBoard);
     }
 
     @Override

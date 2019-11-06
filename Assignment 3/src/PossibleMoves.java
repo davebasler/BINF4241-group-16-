@@ -61,18 +61,18 @@ class PossibleMoves {
     Updates each players list of squares which can be reached currently.
      */
     void update_player_list(GameBoard gameboard, Color current_player_color) {
-        list.clear();
+
         if (current_player_color == Color.WHITE) {
             possible_moves_white.clear();
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if(gameboard.squares[i][j].get_figure()!=null) {
                         if (gameboard.squares[i][j].get_figure().get_colour().equals(current_player_color.toString())) {
-                            list.clear();
-                            list = gameboard.squares[i][j].get_figure().get_list();
-                            for (Square square : list) {
-                                if(!possible_moves_white.contains(square)){
-                                    possible_moves_white.add(square);
+                            FigureIterator iterator = gameboard.squares[i][j].get_figure().createIterator();
+                            while(iterator.hasNext()) {
+                                Square temp = (Square) iterator.next();
+                                if(!possible_moves_white.contains(temp)){
+                                    possible_moves_white.add(temp);
                                 }
                             }
                         }
@@ -89,11 +89,11 @@ class PossibleMoves {
                 for (int j = 0; j < 8; j++) {
                     if(gameboard.squares[i][j].get_figure()!=null) {
                         if (gameboard.squares[i][j].get_figure().get_colour().equals(current_player_color.toString())) {
-                            list.clear();
-                            list = gameboard.squares[i][j].get_figure().get_list();
-                            for (Square square : list) {
-                                if(!possible_moves_black.contains(square)){
-                                    possible_moves_black.add(square);
+                            FigureIterator iterator = gameboard.squares[i][j].get_figure().createIterator();
+                            while(iterator.hasNext()) {
+                                Square temp = (Square) iterator.next();
+                                if(!possible_moves_black.contains(temp)){
+                                    possible_moves_black.add(temp);
                                 }
                             }
                         }

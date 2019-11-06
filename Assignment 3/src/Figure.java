@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public abstract class Figure {
 
     public Color color;
-    private ArrayList<Figure> figure_list;
+    private ArrayList<Square> figure_list;
 
     public Figure(Color color) {
         this.color = color;
@@ -42,6 +42,10 @@ public abstract class Figure {
     }
     public Boolean is_legal_en_passant(int row_old, int column_old, int row_new, int column_new, GameBoard gameboard){
         return null;
+    }
+
+    public FigureIterator createIterator(){
+        return new FigureIterator(this.figure_list);
     }
 }
 
