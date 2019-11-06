@@ -27,7 +27,7 @@ Remark: this is just the general case for a figure. In more specific cases (e.g.
 ### 1. Description <br/>
 For task 3 we chose to implement the third functionality. First, we created an interface (ScoreBoardInterface) with the method updateScorePlayer() which we then implemented in the observer class ScoreBoard. This class stores the respective score of player 1 (black figures) and player 2 (white figures) in two different instance variables which are incremented each time a figure of the opposite color gets eaten. The class also contains a second method displayScores() that prints the scores.
 In our game implementation the class Move is the subject class that implements the methods registerObserver(), removeObserver() and notifyObserver() from the interface MoveInterface. The latter method updates all the observer contained in the list and has as input parameters the variables scorePlayer1 and scorePlayer2 which value is determined in the method eat_figure() each time a figure of the respective color is eaten. 
-The call of the method  displayScores() is located in the main class and is as the name says responsible for printing the actual score of both players.
+The call of the method  displayScores() is located in the main class and is as the name says responsible for printing the actual score of both players..
 <br/>
 ## Notation <br/>
 Standard user input should have the following format --> <br/>
