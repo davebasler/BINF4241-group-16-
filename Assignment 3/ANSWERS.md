@@ -20,6 +20,7 @@ First we added a private instance variable and a private constructor method (whi
 ### 1. Sequence diagram <br/>
 ![class_diagram_singleton](https://github.com/davebasler/BINF4241-group-16-/blob/master/Assignment%203/sequence_diagram_task2.PNG)
 <br/>
+Remark: this is just the general case for a figure. In more specific cases (e.g. if the pawn were the specific figure) there would be additional methods like for example "can_eat_diagonal()" in the sequence diagram. Also the special cases en passant, castling and switching the pawn at the end of the board would need the respective methods to be shown in the sequence diagram (e.g. small_rochade()).
 ## Part 3 <br/>
 ### 1. Description <br/>
 For task 3 we chose to implement the third functionality. First, we created an interface (ScoreBoardInterface) with the method updateScorePlayer() which we then implemented in the observer class ScoreBoard. This class stores the respective score of player 1 (black figures) and player 2 (white figures) in two different instance variables which are incremented each time a figure of the opposite color gets eaten. The class also contains a second method displayScores() that prints the scores.
