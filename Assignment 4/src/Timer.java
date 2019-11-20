@@ -1,4 +1,4 @@
-public class Timer extends Thread {
+public class  Timer extends Thread {
     private Device device;
     private int time;
 
@@ -42,12 +42,13 @@ public class Timer extends Thread {
         try{
             Thread.sleep(this.time);
         }catch (InterruptedException e){
-            e.printStackTrace();
+           System.out.println("Interrupted");
         }
-
-        this.device.set_battery(battery);
-        this.device.set_charging_status(!this.ischarging);
-        this.device.set_status(true);
-        System.out.println("Timer finished");
+        finally {
+            this.device.set_battery(battery);
+            this.device.set_charging_status(!this.ischarging);
+            System.out.println("Timer finished");
+            this.device.set_status(true);
+        }
     }
 }

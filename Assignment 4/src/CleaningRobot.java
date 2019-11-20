@@ -43,7 +43,7 @@ public class CleaningRobot implements  Device, Device2{
             }
         }
     }
-
+    int provTime;
     long startCleaning;
     public void startCleaning() {
         if (this.isOn && this.isInBase && this.batteryStatus == 20 && this.timer > 0 && !this.isCharging) {
@@ -60,7 +60,8 @@ public class CleaningRobot implements  Device, Device2{
                 timerObj1 = new Timer2(false,this.timer * 1000,0, false,this);
                 timerObj1.start();
                 startCleaning = System.currentTimeMillis();
-                this.timer = 0; //----------> new
+                provTime = this.timer;
+                this.timer = 0;
                 System.out.println("Cleaning started!");
             }
         }else if(this.isOn && this.isInBase && this.batteryStatus == 20 && this.timer > 0 && this.isCharging){
@@ -85,7 +86,7 @@ public class CleaningRobot implements  Device, Device2{
 
             }
             else{
-                System.out.println("Device is currently in base. 100% has been cleaned.");
+                System.out.println("Device is currently in base.");
             }
         }
         else{
@@ -100,7 +101,7 @@ public class CleaningRobot implements  Device, Device2{
             System.out.println("The current battery status is: " + batteryStatus + " of 20");
         }
         else{
-            System.out.println("Device is in base. Please check its battery charging status");
+            System.out.println("Device is in base. Please check its battery charging status [Chrg] ");
         }
     }
 
@@ -135,8 +136,26 @@ public class CleaningRobot implements  Device, Device2{
         this.isOn = false;
     }
     public void endCleaning(){
-
-
+        if(this.isInBase){
+            System.out.println("You cannot stop cleaning. Device is not even cleaning!!");
+        }
+        else {
+            if(this.outstandingCleaning!= 0) {
+                long end = System.currentTimeMillis();
+                int diff = Math.abs((20 - ((int)(end-startCleaning)))/1000);
+                this.outstandingCleaning += (20 - diff);
+                timerObj1.interrupt();
+                System.out.println("You can complete the outstanding cleaning with [Outcl]");
+            }
+            else{
+                long end = System.currentTimeMillis();
+                this.timer = provTime;  //provTime declared in line 46 and initialized in line 63
+                int diff =  Math.abs((this.timer - ((int)(end-startCleaning)))/1000);
+                this.outstandingCleaning = this.timer - diff;
+                timerObj1.interrupt();
+                System.out.println("You can complete the outstanding cleaning with [Outcl]");
+            }
+        }
     }
 
 
@@ -147,6 +166,7 @@ public class CleaningRobot implements  Device, Device2{
         this.isInBase = bool;
 
         if(this.batteryStatus!=20){
+            System.out.println("Cleaning robot went back to the base! Battery charges now for 20 seconds!");
             timerObj2 = new Timer2(true,20 * 1000,20, true,this);
             timerObj2.start();
             this.batteryStatus = 20;
@@ -160,6 +180,7 @@ public class CleaningRobot implements  Device, Device2{
 
     public void set_charging_status(boolean bool){
         this.isCharging = bool;
+
     }
 
 }
