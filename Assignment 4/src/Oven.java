@@ -87,12 +87,12 @@ public class Oven implements Device {
     }
 
     public void interruptTheProgram(){
-        if(this.getStatus()) {
+        if(this.getStatus()&&this.isCooking) {
             this.isCooking = false;
             long end = System.currentTimeMillis();
             float sec = (end - start) / 1000F;
             this.timer = (int) (this.timer - sec);
-            //timerObj.interrupt();
+            timerObj.interrupt();
         }
         else{
             System.out.println("Can't interrupt Program because it isn't running!");
@@ -100,9 +100,11 @@ public class Oven implements Device {
     }
 
     public void switchOff(){
+        if(this.isCooking) {
+            timerObj.interrupt();
+        }
         this.isCooking = false;
         this.isOn = false;
-
 
     }
 

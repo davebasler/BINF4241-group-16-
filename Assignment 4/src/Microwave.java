@@ -66,12 +66,12 @@ public class Microwave implements Device{
     }
 
     public void interruptTheProgram(){
-        if(this.getStatus()) {
+        if(this.getStatus()&&this.isBacking) {
             this.isBacking = false;
             long end = System.currentTimeMillis();
             float sec = (end - start) / 1000F;
             this.timer = (int) (this.timer - sec);
-            //timerObj.interrupt();
+            timerObj.interrupt();
         }
         else{
             System.out.println("Can't interrupt Program because it isn't running!");
@@ -79,10 +79,11 @@ public class Microwave implements Device{
     }
 
     public void switchOff(){
+        if(this.isBacking) {
+            timerObj.interrupt();
+        }
         this.isBacking = false;
         this.isOn = false;
-
-
     }
 
     public void set_status(boolean bool){

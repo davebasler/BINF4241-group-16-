@@ -39,10 +39,10 @@ public class Dishwasher implements  Device {
             Scanner scan = new Scanner(System.in);
             this.programType = scan.nextInt();
             switch(this.programType){
-                case 1: this.glassesTimer = 50; tmp = false; break;
-                case 2: this.platesTimer = 100; tmp = false; break;
-                case 3: this.pansTimer = 150; tmp = false; break;
-                case 4: this.mixedTimer = 200; tmp = false; break;
+                case 1: this.glassesTimer = 50; tmp = false; this.platesTimer = 0;this.pansTimer =0;this.mixedTimer = 0; break;
+                case 2: this.platesTimer = 100; tmp = false;this.glassesTimer = 0;this.pansTimer =0;this.mixedTimer = 0; break;
+                case 3: this.pansTimer = 150; tmp = false;this.platesTimer = 0;this.glassesTimer =0;this.mixedTimer = 0; break;
+                case 4: this.mixedTimer = 200; tmp = false; this.platesTimer = 0;this.pansTimer =0;this.glassesTimer = 0;break;
             }
         }
     }
@@ -102,14 +102,18 @@ public class Dishwasher implements  Device {
     public void stopDishwasher(){
         long end = System.currentTimeMillis();
         float sec = (end - start) / 1000F;
-        if(this.glassesTimer + this.pansTimer + this.platesTimer + this.mixedTimer - sec == 0){
+        if(this.isWashing){
             this.isWashing = false;
+            timerObj.interrupt();
         }
         else{
-            System.out.println("Can't stop program because it is still running!");
+            System.out.println("Can't stop program because it isn't running!");
         }
     }
     public void switchOff(){
+        if(this.isWashing) {
+            timerObj.interrupt();
+        }
         this.isWashing = false;
         this.isOn = false;
     }
