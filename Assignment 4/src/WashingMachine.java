@@ -97,7 +97,7 @@ public class WashingMachine implements Device {
         public void turnOff(){
             long end = System.currentTimeMillis();
             float sec = (end - start) / 1000F;
-            if(this.doubleRinseTimer + this.intenseTimer + this.quickTimer + this.spinTimer - sec != 0){
+            if(this.isWashing){
                 this.isWashing = false;
                 timerObj.interrupt();
             }
