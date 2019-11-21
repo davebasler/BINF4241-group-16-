@@ -12,7 +12,7 @@ public class  Timer extends Thread {
         try{
                 Thread.sleep(this.time);
             }catch (InterruptedException e){
-                e.printStackTrace();
+                System.out.println("Interrupted");
             }
         this.device.set_status(false);
         System.out.println("Timer finished");

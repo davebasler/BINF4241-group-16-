@@ -68,6 +68,9 @@ public class Main {
         WashingMachineCommandTurnOff WashingMachineCommandTurnOff = new WashingMachineCommandTurnOff(washingMachine);
         WashingMachineCommandStartWashing washingMachineCommandStartWashing = new WashingMachineCommandStartWashing(washingMachine);
 
+
+
+
         smartphone.setSwitchOnSlots(3,washingMachineOn);
         smartphone.setSwitchOffSlots(3,washingMachineOff);
         smartphone.setTemperatureSlots(3,washingMachineSetTemp);
@@ -202,6 +205,7 @@ public class Main {
                     }
                 }
                 else{
+
                     System.out.println("Choose function: [Off] Switch Off -- [Degree] Set Degree --  [P] Set Program -- [T] Turn off -- [S] Start Machine");
                     input = scan.next();
                     if(input.equals("Off")){

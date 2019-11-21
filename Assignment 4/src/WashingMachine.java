@@ -43,10 +43,10 @@ public class WashingMachine implements Device {
                 Scanner scan = new Scanner(System.in);
                 this.programType = scan.nextInt();
                 switch(this.programType){
-                    case 1: this.doubleRinseTimer = 50; tmp = false; break;
-                    case 2: this.intenseTimer = 100; tmp = false; break;
-                    case 3: this.quickTimer = 150; tmp = false; break;
-                    case 4: this.spinTimer = 200; tmp = false; break;
+                    case 1: this.doubleRinseTimer = 50; tmp = false;this.intenseTimer =0; this.quickTimer = 0;this.spinTimer =0;break;
+                    case 2: this.intenseTimer = 100; tmp = false;this.doubleRinseTimer =0; this.quickTimer = 0;this.spinTimer =0; break;
+                    case 3: this.quickTimer = 150; tmp = false;this.intenseTimer =0; this.doubleRinseTimer = 0;this.spinTimer =0; break;
+                    case 4: this.spinTimer = 200; tmp = false;this.intenseTimer =0; this.quickTimer = 0;this.doubleRinseTimer =0; break;
                 }
             }
         }
@@ -86,7 +86,7 @@ public class WashingMachine implements Device {
     void selectDegrees(){
         boolean tmp = true;
         while(tmp) {
-            System.out.println("Select degrees for the Washing machine (min 30: ");
+            System.out.println("Select degrees for the Washing machine (min 30): ");
             Scanner scan = new Scanner(System.in);
             this.temperature = scan.nextInt();
             if(this.temperature >= 30){
@@ -96,18 +96,52 @@ public class WashingMachine implements Device {
     }
 
 
+    public void startWashing() {
+        if (this.isOn && this.programType != 0) {
+            if (this.doubleRinseTimer > 0) {
+                timerObj = new Timer(this.doubleRinseTimer * 1000, this);
+                timerObj.start();
+                this.isWashing = true;
+                start = System.currentTimeMillis();
 
-        void turnOff(){
+            } else if (this.intenseTimer > 0) {
+                timerObj = new Timer(this.intenseTimer * 1000, this);
+                timerObj.start();
+                this.isWashing = true;
+                start = System.currentTimeMillis();
+
+            } else if (this.quickTimer > 0) {
+                timerObj = new Timer(this.quickTimer * 1000, this);
+                timerObj.start();
+                this.isWashing = true;
+                start = System.currentTimeMillis();
+
+            } else if (this.spinTimer > 0) {
+                timerObj = new Timer(this.spinTimer * 1000, this);
+                timerObj.start();
+                this.isWashing = true;
+                start = System.currentTimeMillis();
+            }
+        }else{
+            System.out.println("Can't Start yet because automated timer isn't set");
+        }
+    }
+
+        public void turnOff(){
             long end = System.currentTimeMillis();
             float sec = (end - start) / 1000F;
-            if(this.doubleRinseTimer + this.intenseTimer + this.quickTimer + this.spinTimer - sec == 0){
+            if(this.isWashing){
                 this.isWashing = false;
+                timerObj.interrupt();
             }
             else{
-                System.out.println("Can't stop program because it is still running!");
+                System.out.println("Can't stop program because it isn't running!");
             }
         }
         public void switchOff(){
+            if(this.isWashing) {
+                timerObj.interrupt();
+            }
             this.isWashing = false;
             this.isOn = false;
         }
