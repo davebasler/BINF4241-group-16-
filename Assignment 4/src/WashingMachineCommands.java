@@ -26,18 +26,6 @@ class WashingMachineCommandOff implements Command{
     }
 }
 
-class WashingMachineCommandStart implements Command{
-    private WashingMachine washingMachine;
-
-    public WashingMachineCommandStart(WashingMachine washingMachine){
-        this.washingMachine = washingMachine;
-    }
-
-    public void execute(){
-        washingMachine.startWashing();
-    }
-}
-
 class WashingMachineCommandSetTemperature implements Command{
     private WashingMachine washingMachine;
 
