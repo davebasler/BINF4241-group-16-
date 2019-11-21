@@ -95,47 +95,14 @@ public class WashingMachine implements Device {
         }
     }
 
-
-    public void startWashing() {
-        if (this.isOn && this.programType != 0) {
-            if (this.doubleRinseTimer > 0) {
-                timerObj = new Timer(this.doubleRinseTimer * 1000, this);
-                timerObj.start();
-                this.isWashing = true;
-                start = System.currentTimeMillis();
-
-            } else if (this.intenseTimer > 0) {
-                timerObj = new Timer(this.intenseTimer * 1000, this);
-                timerObj.start();
-                this.isWashing = true;
-                start = System.currentTimeMillis();
-
-            } else if (this.quickTimer > 0) {
-                timerObj = new Timer(this.quickTimer * 1000, this);
-                timerObj.start();
-                this.isWashing = true;
-                start = System.currentTimeMillis();
-
-            } else if (this.spinTimer > 0) {
-                timerObj = new Timer(this.spinTimer * 1000, this);
-                timerObj.start();
-                this.isWashing = true;
-                start = System.currentTimeMillis();
-            }
-        }else{
-            System.out.println("Can't Start yet because automated timer isn't set");
-        }
-    }
-
-        public void turnOff(){
+    public void turnOff(){
             long end = System.currentTimeMillis();
             float sec = (end - start) / 1000F;
-            if(this.isWashing){
-                this.isWashing = false;
-                timerObj.interrupt();
+            if (!this.isWashing){
+                System.out.println("Device is already turned off");
             }
-            else{
-                System.out.println("Can't stop program because it isn't running!");
+            else if(this.spinTimer + this.quickTimer + this.intenseTimer + this.doubleRinseTimer - sec > 0){
+                System.out.println("Program is still running");
             }
         }
         public void switchOff(){
