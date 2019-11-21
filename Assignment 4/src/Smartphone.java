@@ -34,35 +34,35 @@ public class Smartphone {
         }
     }
 
-    public void setSwitchOnSlots(int slot, Command command){
+    void setSwitchOnSlots(int slot, Command command){
         switchOnSlots.set(slot, command);
     }
 
-    public void setSwitchOffSlots(int slot, Command command){
+    void setSwitchOffSlots(int slot, Command command){
         switchOffSlots.set(slot, command);
     }
 
-    public void setTimerSlots(int slot, Command command){
+    void setTimerSlots(int slot, Command command){
         setTimerSlot.set(slot, command);
     }
 
-    public void setTemperatureSlots(int slot, Command command){
+    void setTemperatureSlots(int slot, Command command){
         setTemperatureSlots.set(slot, command);
     }
 
-    public void setUpProgramSlots(int slot, Command command){
+    void setUpProgramSlots(int slot, Command command){
         setUpProgramSlots.set(slot, command);
     }
 
-    public void setStartSlots(int slot, Command command){
+    void setStartSlots(int slot, Command command){
         startSlots.set(slot, command);
     }
 
-    public void setStopSlots(int slot, Command command){
+    void setStopSlots(int slot, Command command){
         stopSlots.set(slot, command);
     }
 
-    public void setCheckTimerSlots(int slot, Command command){
+    void setCheckTimerSlots(int slot, Command command){
         checkTimerSlots.set(slot, command);
     }
 
@@ -82,35 +82,35 @@ public class Smartphone {
         completeOutstandingCleaningSlots.set(slot, command);
     }
 
-    public void pressSwitchOnButton(int slot){
+    void pressSwitchOnButton(int slot){
         switchOnSlots.get(slot).execute();
     }
 
-    public void pressSwitchOffButton(int slot){
+    void pressSwitchOffButton(int slot){
         switchOffSlots.get(slot).execute();
     }
 
-    public void pressTimerButton(int slot){
+    void pressTimerButton(int slot){
         setTimerSlot.get(slot).execute();
     }
 
-    public void pressTemperatureButton(int slot){
+    void pressTemperatureButton(int slot){
         setTemperatureSlots.get(slot).execute();
     }
 
-    public void pressProgramButton(int slot){
+    void pressProgramButton(int slot){
         setUpProgramSlots.get(slot).execute();
     }
 
-    public void pressStartButton(int slot){
+    void pressStartButton(int slot){
         startSlots.get(slot).execute();
     }
 
-    public void pressStopButton(int slot){
+    void pressStopButton(int slot){
         stopSlots.get(slot).execute();
     }
 
-    public void pressCheckTimerButton(int slot){
+    void pressCheckTimerButton(int slot){
         checkTimerSlots.get(slot).execute();
     }
 

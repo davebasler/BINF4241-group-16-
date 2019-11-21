@@ -4,7 +4,7 @@ public class CleaningRobotCommands {
 class CleaningRobotCommandOn implements Command {
     private CleaningRobot cleaningRobot;
 
-    public CleaningRobotCommandOn(CleaningRobot cleaningRobot) {
+    CleaningRobotCommandOn(CleaningRobot cleaningRobot) {
         this.cleaningRobot = cleaningRobot;
     }
 
@@ -16,7 +16,7 @@ class CleaningRobotCommandOn implements Command {
 class CleaningRobotCommandOff implements Command {
     private CleaningRobot cleaningRobot;
 
-    public CleaningRobotCommandOff(CleaningRobot cleaningRobot) {
+    CleaningRobotCommandOff(CleaningRobot cleaningRobot) {
         this.cleaningRobot = cleaningRobot;
     }
 
@@ -28,7 +28,7 @@ class CleaningRobotCommandOff implements Command {
 class CleaningRobotCommandSetTime implements Command {
     private CleaningRobot cleaningRobot;
 
-    public CleaningRobotCommandSetTime(CleaningRobot cleaningRobot) {
+    CleaningRobotCommandSetTime(CleaningRobot cleaningRobot) {
         this.cleaningRobot = cleaningRobot;
     }
 
@@ -40,7 +40,7 @@ class CleaningRobotCommandSetTime implements Command {
 class CleaningRobotCommandStartCleaning implements Command {
     private CleaningRobot cleaningRobot;
 
-    public CleaningRobotCommandStartCleaning(CleaningRobot cleaningRobot) {
+    CleaningRobotCommandStartCleaning(CleaningRobot cleaningRobot) {
         this.cleaningRobot = cleaningRobot;
     }
 
@@ -52,7 +52,7 @@ class CleaningRobotCommandStartCleaning implements Command {
 class CleaningRobotCommandCheckPercentage implements Command {
     private CleaningRobot cleaningRobot;
 
-    public CleaningRobotCommandCheckPercentage(CleaningRobot cleaningRobot) {
+    CleaningRobotCommandCheckPercentage(CleaningRobot cleaningRobot) {
         this.cleaningRobot = cleaningRobot;
     }
 
@@ -64,7 +64,7 @@ class CleaningRobotCommandCheckPercentage implements Command {
 class CleaningRobotCommandCheckBatteryStatus implements Command {
     private CleaningRobot cleaningRobot;
 
-    public CleaningRobotCommandCheckBatteryStatus (CleaningRobot cleaningRobot) {
+    CleaningRobotCommandCheckBatteryStatus(CleaningRobot cleaningRobot) {
         this.cleaningRobot = cleaningRobot;
     }
 
@@ -76,7 +76,7 @@ class CleaningRobotCommandCheckBatteryStatus implements Command {
 class CleaningRobotCommandCheckBatteryChargingStatus implements Command {
     private CleaningRobot cleaningRobot;
 
-    public CleaningRobotCommandCheckBatteryChargingStatus  (CleaningRobot cleaningRobot) {
+    CleaningRobotCommandCheckBatteryChargingStatus(CleaningRobot cleaningRobot) {
         this.cleaningRobot = cleaningRobot;
     }
 
@@ -88,7 +88,7 @@ class CleaningRobotCommandCheckBatteryChargingStatus implements Command {
 class CleaningRobotCommandOutstandingCleaning implements Command {
     private CleaningRobot cleaningRobot;
 
-    public CleaningRobotCommandOutstandingCleaning  (CleaningRobot cleaningRobot) {
+    CleaningRobotCommandOutstandingCleaning(CleaningRobot cleaningRobot) {
         this.cleaningRobot = cleaningRobot;
     }
 
@@ -100,7 +100,7 @@ class CleaningRobotCommandOutstandingCleaning implements Command {
 class CleaningRobotEndCleaning implements Command {
     private CleaningRobot cleaningRobot;
 
-    public CleaningRobotEndCleaning  (CleaningRobot cleaningRobot) {
+    CleaningRobotEndCleaning(CleaningRobot cleaningRobot) {
         this.cleaningRobot = cleaningRobot;
     }
 

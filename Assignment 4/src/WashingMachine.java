@@ -13,10 +13,10 @@ public class WashingMachine implements Device {
         private boolean isWashing;
         private Thread timerObj;
         public static long currentTimeMillis;
-        long start;
+        private long start;
 
 
-        public WashingMachine(){
+        WashingMachine(){
             this.isOn = false;
             this.doubleRinseTimer = 0;
             this.intenseTimer = 0;
@@ -28,7 +28,7 @@ public class WashingMachine implements Device {
 
         }
 
-        public boolean getStatus(){
+        boolean getStatus(){
             return this.isOn;
         }
 
@@ -36,7 +36,7 @@ public class WashingMachine implements Device {
             this.isOn = true;
         }
 
-        public void SelectTypeOfWashing(){
+        void SelectTypeOfWashing(){
             boolean tmp = true;
             while(tmp) {
                 System.out.println("Choose one of the following programs: [1] Double Rinse, [2] Intense, [3] Quick [4] Spin");
@@ -51,7 +51,39 @@ public class WashingMachine implements Device {
             }
         }
 
-    public void selectDegrees(){
+
+    void startWashingMachine() {
+        if (this.isOn && this.programType != 0) {
+            if (this.doubleRinseTimer > 0) {
+                timerObj = new Timer(this.doubleRinseTimer * 1000, this);
+                timerObj.start();
+                this.isWashing = true;
+                start = System.currentTimeMillis();
+
+            } else if (this.intenseTimer > 0) {
+                timerObj = new Timer(this.intenseTimer * 1000, this);
+                timerObj.start();
+                this.isWashing = true;
+                start = System.currentTimeMillis();
+
+            } else if (this.quickTimer > 0) {
+                timerObj = new Timer(this.quickTimer * 1000, this);
+                timerObj.start();
+                this.isWashing = true;
+                start = System.currentTimeMillis();
+
+            } else if (this.spinTimer > 0) {
+                timerObj = new Timer(this.spinTimer * 1000, this);
+                timerObj.start();
+                this.isWashing = true;
+                start = System.currentTimeMillis();
+            }
+        }else{
+            System.out.println("Can't Start yet because automated timer isn't set");
+        }
+    }
+
+    void selectDegrees(){
         boolean tmp = true;
         while(tmp) {
             System.out.println("Select degrees for the Washing machine (min 30: ");
@@ -63,7 +95,9 @@ public class WashingMachine implements Device {
         }
     }
 
-        public void turnOff(){
+
+
+        void turnOff(){
             long end = System.currentTimeMillis();
             float sec = (end - start) / 1000F;
             if(this.doubleRinseTimer + this.intenseTimer + this.quickTimer + this.spinTimer - sec == 0){

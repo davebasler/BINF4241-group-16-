@@ -12,7 +12,7 @@ public class CleaningRobot implements  Device, Device2{
     private Thread timerObj2; //recharge 20 seconds
     public static long currentTimeMillis;
 
-    public CleaningRobot(){
+    CleaningRobot(){
         this.isOn = false;
         this.isInBase = true;
         this.timer = 0;
@@ -23,7 +23,7 @@ public class CleaningRobot implements  Device, Device2{
     }
 
 
-    public boolean getStatus(){
+    boolean getStatus(){
         return this.isOn;
     }
 
@@ -31,7 +31,7 @@ public class CleaningRobot implements  Device, Device2{
         this.isOn = true;
     }
 
-    public void setTimer(){
+    void setTimer(){
         this.outstandingCleaning = 0;
         boolean tmp = true;
         while(tmp) {
@@ -43,9 +43,9 @@ public class CleaningRobot implements  Device, Device2{
             }
         }
     }
-    int provTime;
-    long startCleaning;
-    public void startCleaning() {
+    private int provTime;
+    private long startCleaning;
+    void startCleaning() {
         if (this.isOn && this.isInBase && this.batteryStatus == 20 && this.timer > 0 && !this.isCharging) {
             if (this.timer > this.batteryStatus) {
                 this.outstandingCleaning = this.timer - 20; //If timer is longer than battery time
@@ -72,7 +72,7 @@ public class CleaningRobot implements  Device, Device2{
         }
     }
 
-    public void checkPercentageOfCleaningCompletion(){
+    void checkPercentageOfCleaningCompletion(){
         if(!this.isInBase) {
             long end = System.currentTimeMillis();
             int percentage = (int) (((end - startCleaning)/(long)this.timer)*100)/1000;
@@ -94,7 +94,7 @@ public class CleaningRobot implements  Device, Device2{
         }
     }
 
-    public void checkBatteryStatus(){
+    void checkBatteryStatus(){
         if(!this.isInBase) {
             long end = System.currentTimeMillis();
             int batteryStatus = (int) (((20000 - (end-startCleaning))/1000)); //20 is the max battery charge as defined above
@@ -105,7 +105,7 @@ public class CleaningRobot implements  Device, Device2{
         }
     }
 
-    public void checkBatteryChargingStatus(){
+    void checkBatteryChargingStatus(){
         if(this.isCharging){
             System.out.println("Charging status: Battery is charging");
         }
@@ -114,7 +114,7 @@ public class CleaningRobot implements  Device, Device2{
         }
     }
 
-    public void completeOutstandingCleaning(){
+    void completeOutstandingCleaning(){
         if(this.outstandingCleaning != 0 && this.isInBase && !this.isCharging){
             this.timer = outstandingCleaning;
             this.outstandingCleaning = 0;
@@ -135,7 +135,7 @@ public class CleaningRobot implements  Device, Device2{
         this.isInBase = true;
         this.isOn = false;
     }
-    public void endCleaning(){
+    void endCleaning(){
         if(this.isInBase){
             System.out.println("You cannot stop cleaning. Device is not even cleaning!!");
         }
@@ -178,7 +178,7 @@ public class CleaningRobot implements  Device, Device2{
         this.batteryStatus = num;
     }
 
-    public void set_charging_status(boolean bool){
+    void set_charging_status(boolean bool){
         this.isCharging = bool;
 
     }

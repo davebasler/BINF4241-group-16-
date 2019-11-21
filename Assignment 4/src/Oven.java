@@ -18,7 +18,7 @@ public class Oven implements Device {
 
     }
 
-    public boolean getStatus(){
+    boolean getStatus(){
         return this.isOn;
     }
 
@@ -26,7 +26,7 @@ public class Oven implements Device {
         this.isOn = true;
     }
 
-    public void setTimer(){
+    void setTimer(){
         boolean tmp = true;
         while(tmp) {
             System.out.println("Set time for the oven (greater than zero): ");
@@ -38,7 +38,7 @@ public class Oven implements Device {
         }
     }
 
-    public void setTemperature(){
+    void setTemperature(){
         boolean tmp = true;
         while(tmp) {
             System.out.println("Set the temperature for the oven (min. 60 degrees): ");
@@ -50,7 +50,7 @@ public class Oven implements Device {
         }
     }
 
-    public void SetUpProgram(){
+    void SetUpProgram(){
         boolean tmp = true;
         while(tmp) {
             System.out.println("Choose one of the following programs: [1] ventilated, [2] grill or [3] top bottom heating");
@@ -62,8 +62,8 @@ public class Oven implements Device {
         }
     }
 
-    long start;
-    public void startCooking(){
+    private long start;
+    void startCooking(){
         if(this.isOn && this.temperature >= 60 && this.timer > 0 && this.programType != 0){
             timerObj = new Timer(this.timer*1000, this);
             timerObj.start();
@@ -75,7 +75,7 @@ public class Oven implements Device {
         }
     }
 
-    public void checkTimer(){
+    void checkTimer(){
         if(this.isCooking) {
             long end = System.currentTimeMillis();
             float sec = (end - start) / 1000F;
@@ -86,7 +86,7 @@ public class Oven implements Device {
         }
     }
 
-    public void interruptTheProgram(){
+    void interruptTheProgram(){
         if(this.getStatus()) {
             this.isCooking = false;
             long end = System.currentTimeMillis();

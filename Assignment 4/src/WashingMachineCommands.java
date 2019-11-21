@@ -5,7 +5,7 @@ public class WashingMachineCommands {
 class WashingMachineCommandOn implements Command{
     private WashingMachine washingMachine;
 
-    public WashingMachineCommandOn(WashingMachine washingMachine){
+    WashingMachineCommandOn(WashingMachine washingMachine){
         this.washingMachine = washingMachine;
     }
 
@@ -17,7 +17,7 @@ class WashingMachineCommandOn implements Command{
 class WashingMachineCommandOff implements Command{
     private WashingMachine washingMachine;
 
-    public WashingMachineCommandOff(WashingMachine washingMachine){
+    WashingMachineCommandOff(WashingMachine washingMachine){
         this.washingMachine = washingMachine;
     }
 
@@ -29,7 +29,7 @@ class WashingMachineCommandOff implements Command{
 class WashingMachineCommandSetTemperature implements Command{
     private WashingMachine washingMachine;
 
-    public WashingMachineCommandSetTemperature(WashingMachine washingMachine){
+    WashingMachineCommandSetTemperature(WashingMachine washingMachine){
         this.washingMachine = washingMachine;
     }
 
@@ -38,28 +38,42 @@ class WashingMachineCommandSetTemperature implements Command{
     }
 }
 
-class WashingMachineCommandSetProgram implements Command{
+class WashingMachineCommandStartWashing implements Command {
     private WashingMachine washingMachine;
 
-    public WashingMachineCommandSetProgram(WashingMachine washingMachine){
+    WashingMachineCommandStartWashing(WashingMachine washingMachine) {
         this.washingMachine = washingMachine;
     }
 
-    public void execute(){
-        washingMachine.SelectTypeOfWashing();
+    public void execute() {
+        washingMachine.startWashingMachine();
     }
 }
 
-class WashingMachineCommandTurnOff implements Command{
-    private WashingMachine washingMachine;
 
-    public WashingMachineCommandTurnOff(WashingMachine washingMachine){
-        this.washingMachine = washingMachine;
+    class WashingMachineCommandSetProgram implements Command {
+        private WashingMachine washingMachine;
+
+        WashingMachineCommandSetProgram(WashingMachine washingMachine) {
+            this.washingMachine = washingMachine;
+        }
+
+        public void execute() {
+            washingMachine.SelectTypeOfWashing();
+        }
     }
 
-    public void execute(){
-        washingMachine.turnOff();
-    }
+    class WashingMachineCommandTurnOff implements Command {
+        private WashingMachine washingMachine;
+
+        WashingMachineCommandTurnOff(WashingMachine washingMachine) {
+            this.washingMachine = washingMachine;
+        }
+
+        public void execute() {
+            washingMachine.turnOff();
+        }
+
 }
 
 

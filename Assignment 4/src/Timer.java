@@ -26,7 +26,7 @@ public class  Timer extends Thread {
     private boolean ischarging;
     private boolean isInBase;
 
-    public Timer2(boolean isInBase, int time, int battery ,boolean ischarging, CleaningRobot device){
+    Timer2(boolean isInBase, int time, int battery, boolean ischarging, CleaningRobot device){
         this.time = time;
         this.device = device;
         this.battery = battery;

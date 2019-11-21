@@ -24,7 +24,7 @@ public class Dishwasher implements  Device {
 
     }
 
-    public boolean getStatus(){
+    boolean getStatus(){
         return this.isOn;
     }
 
@@ -32,7 +32,7 @@ public class Dishwasher implements  Device {
         this.isOn = true;
     }
 
-    public void SetUpProgram(){
+    void SetUpProgram(){
         boolean tmp = true;
         while(tmp) {
             System.out.println("Choose one of the following programs: [1] glasses, [2] plates, [3] pans oe [4] mixed");
@@ -47,8 +47,8 @@ public class Dishwasher implements  Device {
         }
     }
 
-    long start;
-    public void startWashing() {
+    private long start;
+    void startWashing() {
         if (this.isOn && this.programType != 0) {
             if (this.glassesTimer > 0) {
                 timerObj = new Timer(this.glassesTimer * 1000, this);
@@ -79,7 +79,7 @@ public class Dishwasher implements  Device {
         }
     }
 
-    public void checkTimer(){
+    void checkTimer(){
         long end = System.currentTimeMillis();
         float sec = (end - start) / 1000F;
 
@@ -99,7 +99,7 @@ public class Dishwasher implements  Device {
         }
     }
 
-    public void stopDishwasher(){
+    void stopDishwasher(){
         long end = System.currentTimeMillis();
         float sec = (end - start) / 1000F;
         if(this.glassesTimer + this.pansTimer + this.platesTimer + this.mixedTimer - sec == 0){

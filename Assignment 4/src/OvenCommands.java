@@ -4,7 +4,7 @@ public class OvenCommands {
 class OvenCommandOn implements Command{
     private Oven oven;
 
-    public OvenCommandOn(Oven oven){
+    OvenCommandOn(Oven oven){
         this.oven = oven;
     }
 
@@ -16,7 +16,7 @@ class OvenCommandOn implements Command{
 class OvenCommandOff implements Command{
     private Oven oven;
 
-    public OvenCommandOff(Oven oven){
+    OvenCommandOff(Oven oven){
         this.oven = oven;
     }
 
@@ -28,7 +28,7 @@ class OvenCommandOff implements Command{
 class OvenCommandSetTemperature implements Command{
     private Oven oven;
 
-    public OvenCommandSetTemperature(Oven oven){
+    OvenCommandSetTemperature(Oven oven){
         this.oven = oven;
     }
 
@@ -40,7 +40,7 @@ class OvenCommandSetTemperature implements Command{
 class OvenCommandSetTime implements Command{
     private Oven oven;
 
-    public OvenCommandSetTime(Oven oven){
+    OvenCommandSetTime(Oven oven){
         this.oven = oven;
     }
 
@@ -52,7 +52,7 @@ class OvenCommandSetTime implements Command{
 class OvenCommandSetProgram implements Command{
     private Oven oven;
 
-    public OvenCommandSetProgram(Oven oven){
+    OvenCommandSetProgram(Oven oven){
         this.oven = oven;
     }
 
@@ -64,7 +64,7 @@ class OvenCommandSetProgram implements Command{
 class OvenCommandInterrupt implements Command{
     private Oven oven;
 
-    public OvenCommandInterrupt(Oven oven){
+    OvenCommandInterrupt(Oven oven){
         this.oven = oven;
     }
 
@@ -76,7 +76,7 @@ class OvenCommandInterrupt implements Command{
 class OvenCommandStartCooking implements Command{
     private Oven oven;
 
-    public OvenCommandStartCooking(Oven oven){
+    OvenCommandStartCooking(Oven oven){
         this.oven = oven;
     }
 
@@ -88,7 +88,7 @@ class OvenCommandStartCooking implements Command{
 class OvenCommandCheckTime implements Command{
     private Oven oven;
 
-    public OvenCommandCheckTime (Oven oven){
+    OvenCommandCheckTime(Oven oven){
         this.oven = oven;
     }
 

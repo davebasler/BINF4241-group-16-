@@ -66,12 +66,14 @@ public class Main {
         WashingMachineCommandSetTemperature washingMachineSetTemp = new WashingMachineCommandSetTemperature(washingMachine);
         WashingMachineCommandSetProgram washingMachineCommandSetProgram = new WashingMachineCommandSetProgram(washingMachine);
         WashingMachineCommandTurnOff WashingMachineCommandTurnOff = new WashingMachineCommandTurnOff(washingMachine);
+        WashingMachineCommandStartWashing washingMachineCommandStartWashing = new WashingMachineCommandStartWashing(washingMachine);
 
         smartphone.setSwitchOnSlots(3,washingMachineOn);
         smartphone.setSwitchOffSlots(3,washingMachineOff);
         smartphone.setTemperatureSlots(3,washingMachineSetTemp);
         smartphone.setUpProgramSlots(3,washingMachineCommandSetProgram);
         smartphone.setStopSlots(3, WashingMachineCommandTurnOff);
+        smartphone.setStartSlots(3, washingMachineCommandStartWashing);
 
         //Set properties for CleaningRobot
         CleaningRobot cleaningRobot = new CleaningRobot();
@@ -200,7 +202,7 @@ public class Main {
                     }
                 }
                 else{
-                    System.out.println("Choose function: [Off] Switch Off -- [Degree] Set Degree --  [P] Set Program -- [T] Turn off");
+                    System.out.println("Choose function: [Off] Switch Off -- [Degree] Set Degree --  [P] Set Program -- [T] Turn off -- [S] Start Machine");
                     input = scan.next();
                     if(input.equals("Off")){
                         smartphone.pressSwitchOffButton(3);
@@ -214,6 +216,9 @@ public class Main {
                     }
                     if(input.equals("T")){
                         smartphone.pressStopButton(3);
+                    }
+                    if(input.equals("S")){
+                        smartphone.pressStartButton(3);
                     }
 
                 }
