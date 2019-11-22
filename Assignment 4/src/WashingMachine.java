@@ -37,23 +37,28 @@ public class WashingMachine implements Device {
         }
 
         void SelectTypeOfWashing(){
-            boolean tmp = true;
-            while(tmp) {
-                System.out.println("Choose one of the following programs: [1] Double Rinse, [2] Intense, [3] Quick [4] Spin");
-                Scanner scan = new Scanner(System.in);
-                this.programType = scan.nextInt();
-                switch(this.programType){
-                    case 1: this.doubleRinseTimer = 50; tmp = false;this.intenseTimer =0; this.quickTimer = 0;this.spinTimer =0;break;
-                    case 2: this.intenseTimer = 100; tmp = false;this.doubleRinseTimer =0; this.quickTimer = 0;this.spinTimer =0; break;
-                    case 3: this.quickTimer = 150; tmp = false;this.intenseTimer =0; this.doubleRinseTimer = 0;this.spinTimer =0; break;
-                    case 4: this.spinTimer = 200; tmp = false;this.intenseTimer =0; this.quickTimer = 0;this.doubleRinseTimer =0; break;
+            if(!this.isWashing) {
+                boolean tmp = true;
+                while(tmp) {
+                    System.out.println("Choose one of the following programs: [1] Double Rinse, [2] Intense, [3] Quick [4] Spin");
+                    Scanner scan = new Scanner(System.in);
+                    this.programType = scan.nextInt();
+                    switch(this.programType){
+                        case 1: this.doubleRinseTimer = 50; tmp = false;this.intenseTimer =0; this.quickTimer = 0;this.spinTimer =0;break;
+                        case 2: this.intenseTimer = 100; tmp = false;this.doubleRinseTimer =0; this.quickTimer = 0;this.spinTimer =0; break;
+                        case 3: this.quickTimer = 150; tmp = false;this.intenseTimer =0; this.doubleRinseTimer = 0;this.spinTimer =0; break;
+                        case 4: this.spinTimer = 200; tmp = false;this.intenseTimer =0; this.quickTimer = 0;this.doubleRinseTimer =0; break;
+                    }
                 }
+            }
+            else {
+                System.out.println("Washing Machine is still running, can't set new program type.");
             }
         }
 
 
     void startWashingMachine() {
-        if (this.isOn && this.programType != 0) {
+        if (this.isOn && this.programType != 0 && !this.isWashing) {
             if (this.doubleRinseTimer > 0) {
                 timerObj = new Timer(this.doubleRinseTimer * 1000, this);
                 timerObj.start();
@@ -79,19 +84,23 @@ public class WashingMachine implements Device {
                 start = System.currentTimeMillis();
             }
         }else{
-            System.out.println("Can't Start yet because automated timer isn't set");
+            System.out.println("Can't Start yet because automated timer isn't set or device is currently running!");
         }
     }
 
-    void selectDegrees(){
-        boolean tmp = true;
-        while(tmp) {
-            System.out.println("Select degrees for the Washing machine (min 30): ");
-            Scanner scan = new Scanner(System.in);
-            this.temperature = scan.nextInt();
-            if(this.temperature >= 30){
-                tmp = false;
+    void selectDegrees() {
+        if (!this.isWashing) {
+            boolean tmp = true;
+            while (tmp) {
+                System.out.println("Select degrees for the Washing machine (min 30): ");
+                Scanner scan = new Scanner(System.in);
+                this.temperature = scan.nextInt();
+                if (this.temperature >= 30) {
+                    tmp = false;
+                }
             }
+        }else{
+            System.out.println("Machine is currently running!");
         }
     }
 
@@ -99,7 +108,13 @@ public class WashingMachine implements Device {
             long end = System.currentTimeMillis();
             float sec = (end - start) / 1000F;
             if (!this.isWashing){
-                System.out.println("Device is already turned off");
+                //resets the washing machine
+                this.intenseTimer=0;
+                this.doubleRinseTimer=0;
+                this.quickTimer=0;
+                this.spinTimer=0;
+                this.programType=0;
+                this.temperature=0;
             }
             else if(this.spinTimer + this.quickTimer + this.intenseTimer + this.doubleRinseTimer - sec > 0){
                 System.out.println("Program is still running");

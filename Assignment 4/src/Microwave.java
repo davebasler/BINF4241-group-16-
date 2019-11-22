@@ -43,14 +43,14 @@ public class Microwave implements Device{
 
     long start;
     public void startBacking(){
-        if(this.isOn && this.temperature >= 60 && this.timer > 0){
+        if(this.isOn && this.temperature >= 60 && this.timer > 0 && !this.isBacking){
             timerObj = new Timer(this.timer*1000, this);
             timerObj.start();
             this.isBacking = true;
             start = System.currentTimeMillis();
         }
         else {
-            System.out.println("Can't Start yet because temperature and timer aren't all set yet.");
+            System.out.println("Can't Start yet because temperature and timer aren't all set yet or device is already running!");
         }
     }
 

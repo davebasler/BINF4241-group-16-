@@ -49,7 +49,7 @@ public class Dishwasher implements  Device {
 
     private long start;
     void startWashing() {
-        if (this.isOn && this.programType != 0) {
+        if (this.isOn && this.programType != 0 && !this.isWashing) {
             if (this.glassesTimer > 0) {
                 timerObj = new Timer(this.glassesTimer * 1000, this);
                 timerObj.start();
@@ -75,7 +75,7 @@ public class Dishwasher implements  Device {
                 start = System.currentTimeMillis();
             }
         }else{
-            System.out.println("Can't Start yet because automated timer isn't set");
+            System.out.println("Can't Start yet because automated timer isn't set or device is already running!");
         }
     }
 

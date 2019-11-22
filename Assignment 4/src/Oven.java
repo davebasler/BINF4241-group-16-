@@ -66,13 +66,13 @@ public class Oven implements Device {
     private long start;
 
     void startCooking() {
-        if (this.isOn && this.temperature >= 60 && this.timer > 0 && this.programType != 0) {
+        if (this.isOn && this.temperature >= 60 && this.timer > 0 && this.programType != 0 && !this.isCooking) {
             timerObj = new Timer(this.timer * 1000, this);
             timerObj.start();
             this.isCooking = true;
             start = System.currentTimeMillis();
         } else {
-            System.out.println("Can't Start yet because temperature, timer and program aren't all set yet.");
+            System.out.println("Can't Start yet because temperature, timer and program aren't all set yet or device is already running!");
         }
     }
 
