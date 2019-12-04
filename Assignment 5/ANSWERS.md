@@ -41,5 +41,5 @@ If someone places his last card (and previously "said" UNO) the system will prin
 If the input was wrong the output should never not print a error message.
 <br/><br/>
 ### 3.2. Class diagram <br/>
-
+![class_diagram]https://github.com/davebasler/BINF4241-group-16-/blob/master/Assignment%205/UNO_classdiagram.PNG
 
