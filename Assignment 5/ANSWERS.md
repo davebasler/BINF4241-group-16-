@@ -1,7 +1,7 @@
 # Assignment 5 <br/>
 ## Part 1 <br/>
 ### 1.1. Description <br/>
-
+We tested all the methods in every class of our Snakes and Ladders Game. For some methods we tested Exception cases for when an invalid input is given. No bugs were found with our unit tests, thus we didn't change anything in our original source code. For each test we added a javadoc description.
 ## Part 2 <br/>
 ### 2.1. Descritpion <br/>
 markTwice: this test failed because the mark method (in the class GameBoard) returned the opposite boolean value if the position was already marked and should have returned false in this case, so we changed the return value from true to **false**. <br/><br/>
